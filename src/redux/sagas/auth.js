@@ -2,11 +2,10 @@ import {takeLatest, all, put } from 'redux-saga/effects';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import ActionCreators from '../actionCreators';
-import {portAPI} from '../../../.env';
-
-
 
 export function* login(action){
+
+    const portAPI = process.env.REACT_APP_PORT;
         
     const url = `http://localhost:${portAPI}`;
     let token = localStorage.getItem('token');
@@ -33,8 +32,7 @@ export function* login(action){
                 localStorage.setItem('user', user);
                 yield put(ActionCreators.signinSuccess(user));      
             };
-        } catch(error)        {
-           
+        } catch(error) {           
             localStorage.removeItem('token');
             localStorage.removeItem('user');
             yield put(ActionCreators.signinFailure(error.response.data.error, error.response.status));
