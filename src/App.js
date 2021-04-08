@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from 'react';
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+class App extends Component{  
+  async componentDidMount(){
+    const url = 'http://localhost:3005';
+    const login = await axios.post(`${url}/auth/signin`, {
+      fun_email: '1617886500713@mail.com',
+      fun_passwd: 'Test3D3Senh@',
+    });
+    console.log(login.data);
+    const decoded = jwtDecode(login.data.token);
+    console.log(decoded);
+  };
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+  render(){
+    return (
+      <div className='App'>
+        <h1>Titulo App</h1>
+      </div>
+    );
+  }
+};
 
 export default App;
