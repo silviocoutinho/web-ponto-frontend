@@ -12,6 +12,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Route exact path="/" component={Login} />
+          <Route exact path="/login" component={Login} />
         </Router>
       </Provider>
     );
