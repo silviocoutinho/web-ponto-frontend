@@ -8,9 +8,7 @@ const Header = props => {
     <HeaderStyles>
       <header>
         <Navbar expand="lg" fixed="top">
-          <Navbar.Brand href="restrito">
-            Portal do Servidor - Câmara Municipal de Jahu
-          </Navbar.Brand>
+          <Navbar.Brand href="restrito">Portal do Servidor</Navbar.Brand>
           <button
             className="navbar-toggler"
             type="button"
