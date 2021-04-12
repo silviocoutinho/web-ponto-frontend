@@ -39,6 +39,13 @@ class Login extends Component {
 
   render() {
     console.log('Auth:', this.props.auth);
+    if (this.props.auth.isAuth) {
+      if (this.props.auth.user.adm === true) {
+        return <Redirect to="/admin" />;
+      } else {
+        return <Redirect to="/restrito" />;
+      }
+    }
     return (
       <IndexStyles>
         <Header title="Câmara Municipal de Jahu" />
