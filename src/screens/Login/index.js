@@ -34,16 +34,24 @@ class Login extends Component {
   };
   login = () => {
     const { email, passwd } = this.state.form;
+    this.props.login(email, passwd);
   };
 
   render() {
     console.log('Auth:', this.props.auth);
+    if (this.props.auth.isAuth) {
+      if (this.props.auth.user.adm === true) {
+        return <Redirect to="/admin" />;
+      } else {
+        return <Redirect to="/restrito" />;
+      }
+    }
     return (
       <IndexStyles>
         <Header title="Câmara Municipal de Jahu" />
         <Container className="meio">
           <h1 className="login-title mt-5 text-center">Entrar no Sistema</h1>
-          <h2></h2>
+          <h2>{}</h2>
           <Row>
             <Col className="mx-auto" sm={9} md={7} lg={5}>
               <Jumbotron className="shadow p-5 mb-2 rounded">

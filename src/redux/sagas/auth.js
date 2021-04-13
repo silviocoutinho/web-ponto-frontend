@@ -4,9 +4,10 @@ import jwtDecode from 'jwt-decode';
 import ActionCreators from '../actionCreators';
 
 export function* login(action) {
-  const portAPI = process.env.REACT_APP_PORT_API;
+  const { REACT_APP_PORT_API, REACT_APP_URL } = process.env;
 
-  const url = `http://localhost:${portAPI}`;
+  const url = `${REACT_APP_URL}:${REACT_APP_PORT_API}`;
+
   let token = localStorage.getItem('token');
 
   if (token) {
