@@ -55,6 +55,13 @@ class Login extends Component {
           <Row>
             <Col className="mx-auto" sm={9} md={7} lg={5}>
               <Jumbotron className="shadow p-5 mb-2 rounded">
+                {this.props.auth.error && (
+                  <Alert variant="danger">
+                    <p className="login-alert">
+                      {this.props.auth.errorMessage}
+                    </p>
+                  </Alert>
+                )}
                 <Form>
                   <Form.Group controlId="formEmail">
                     <Form.Label>Email:</Form.Label>
