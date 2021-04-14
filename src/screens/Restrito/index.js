@@ -1,5 +1,40 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Restrito = props => <h1>Restrito</h1>;
+import ActionCreator from '../../redux/actionCreators';
 
-export default Restrito;
+import Home from './Home';
+
+const Restrito = props => {
+  if (!props.auth.isAuth) {
+    return <Redirect to="/login" />;
+  }
+  const { path } = props.match;
+
+  return (
+    <div>
+      <Switch>
+        <Route
+          exact
+          path={`${path}/`}
+          component={() => <Home match={path} />}
+        />
+      </Switch>
+    </div>
+  );
+};
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    validateToken: () => dispatch(ActionCreator.validateTokenRequest()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Restrito);
