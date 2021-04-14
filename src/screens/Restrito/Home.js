@@ -11,7 +11,7 @@ import { IndexStyles } from './Styles';
 const Home = props => {
   return (
     <IndexStyles>
-      <Header title={'Dados da Transparência'} />
+      <Header title={'Portal do Servidor'} />
       <Container fluid="xs md lg">
         <Row>
           <Col xs={4} md={3} className="menu-lateral">
