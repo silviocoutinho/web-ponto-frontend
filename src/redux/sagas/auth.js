@@ -46,8 +46,9 @@ export function* login(action) {
 }
 
 export function* validateToken() {
-  const port = 3300;
-  const url = `http://localhost:${port}`;
+  const { REACT_APP_PORT_API, REACT_APP_URL } = process.env;
+  const url = `${REACT_APP_URL}:${REACT_APP_PORT_API}`;
+
   let token = localStorage.getItem('token');
 
   if (token) {
