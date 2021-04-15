@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import ActionCreator from '../../redux/actionCreators';
 
 import Home from './Home';
+import Rotas from './elements/Rotas';
 
 const Restrito = props => {
   if (!props.auth.isAuth) {
@@ -21,6 +22,7 @@ const Restrito = props => {
           path={`${path}/`}
           component={() => <Home match={path} />}
         />
+        <Rotas path={path} />
       </Switch>
     </div>
   );
