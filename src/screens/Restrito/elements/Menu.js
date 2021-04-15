@@ -31,10 +31,10 @@ const Menu = () => {
       <Collapse in={openPontos} appear={true}>
         <ul>
           <li>
-            <Link to={'/restrito/'}>Consulta</Link>
+            <Link to={'/restrito/consulta-mensal'}>Relatório por Mês</Link>
           </li>
           <li>
-            <Link to={'/restrito/'}>Relatórios</Link>
+            <Link to={'/restrito/'}>Consulta por dia</Link>
           </li>
         </ul>
       </Collapse>
