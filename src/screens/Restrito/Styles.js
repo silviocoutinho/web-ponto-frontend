@@ -52,6 +52,15 @@ export const IndexStyles = styled.div`
     font: 14px 'Titillium+Web', sans-serif;
     color: #c2c7d0;
   }
+  .menu-lateral ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0.75rem;
+  }
+  .menu-lateral li a {
+    display: block;
+    padding: 0.75rem 1.5rem 0.75rem 1.5rem;
+  }
   .menu-lateral-titulo {
     background-color: #454d54;
     padding: 5px 0px 5px 0px; /*t r b l */
@@ -69,6 +78,29 @@ export const IndexStyles = styled.div`
     margin-right: 0.125rem;
     font-size: 16px;
   }
+
+  .menu-lateral-button {
+    background-color: #343a40;
+    text-align: left;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-color: transparent;
+    font: 16px 'Titillium+Web', sans-serif;
+    color: #c2c7d0;
+  }
+
+  .menu-lateral-button-icone {
+    margin-right: 0.5rem;
+  }
+
+  .barra-navegacao-badge {
+    background-color: red;
+    color: #fff;
+    position: absolute;
+    top: -0.25rem;
+    right: 1rem;
+  }
+
   .sidebar {
     width: 14rem !important;
   }
