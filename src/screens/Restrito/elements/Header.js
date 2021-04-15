@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Image, Badge } from 'react-bootstrap';
+import { BsFillBellFill as BsFill } from 'react-icons/bs';
 
 import ActionCreators from '../../../redux/actionCreators';
 import { HeaderStyles } from '../Styles';
 import logo from '../../Resource/images/logo-small6.jpg';
 
 const Header = props => {
+  const navAlertIcon = 1;
   return (
     <HeaderStyles>
       <header>
@@ -42,6 +44,27 @@ const Header = props => {
               <NavDropdown.Item eventKey="3" onClick={props.logout}>
                 Sair
               </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown
+              title={
+                <>
+                  <BsFill className="menu-lateral-button-icone" />
+                  {navAlertIcon > 0 && (
+                    <Badge variant="light" className="barra-navegacao-badge">
+                      {navAlertIcon}
+                    </Badge>
+                  )}
+                </>
+              }
+              id="basic-nav-dropdown"
+              className="menu-usuario"
+              disabled={navAlertIcon == 0}
+            >
+              {navAlertIcon > 0 && (
+                <NavDropdown.Item eventKey="1" href="restrito/avisos">
+                  Avisos
+                </NavDropdown.Item>
+              )}
             </NavDropdown>
           </Nav>
         </Navbar>
