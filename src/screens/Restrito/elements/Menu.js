@@ -1,28 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Nav } from 'react-bootstrap';
+import { Button, Nav, Collapse } from 'react-bootstrap';
 
 import { BsFillCaretRightFill as BsCicle } from 'react-icons/bs';
 import { BsGridFill as BsGrid } from 'react-icons/bs';
+import { BsFillCalendarFill } from 'react-icons/bs';
+import { BsFillArchiveFill } from 'react-icons/bs';
+import { BsFillGridFill } from 'react-icons/bs';
 
 const Menu = () => {
+  const [openPontos, setOpenPontos] = useState(true);
+  const [openHolerite, setOpenHolerite] = useState(true);
+
   return (
     <div>
       <div className="menu-lateral-titulo">
-        <h5>Menu</h5>
+        <h5>
+          <BsFillGridFill className="menu-lateral-button-icone" />
+          Menu
+        </h5>
       </div>
-      <a>
-        <BsGrid />
-        Pontos
-      </a>
-      <Nav defaultActiveKey="/home" className="flex-column">
-        <Nav.Link href="/home">Active</Nav.Link>
-        <Nav.Link eventKey="link-1">Link</Nav.Link>
-        <Nav.Link eventKey="link-2">Link</Nav.Link>
-        <Nav.Link eventKey="disabled" disabled>
-          Disabled
-        </Nav.Link>
-      </Nav>
+      <Button
+        variant="secondary"
+        className="menu-lateral-button"
+        onClick={() => setOpenPontos(!openPontos)}
+      >
+        <BsFillCalendarFill className="menu-lateral-button-icone" />
+        Registro de Ponto
+      </Button>
+      <Collapse in={openPontos} appear={true}>
+        <ul>
+          <li>
+            <Link to={'/restrito/'}>Consulta</Link>
+          </li>
+          <li>
+            <Link to={'/restrito/'}>Relatórios</Link>
+          </li>
+        </ul>
+      </Collapse>
+      <Button
+        variant="secondary"
+        className="menu-lateral-button"
+        onClick={() => setOpenHolerite(!openHolerite)}
+      >
+        <BsFillArchiveFill className="menu-lateral-button-icone" />
+        Holerite
+      </Button>
+      <Collapse in={openHolerite} appear={true}>
+        <ul>
+          <li>
+            <Link to={'/restrito/'}>Obter</Link>
+          </li>
+          <li>
+            <Link to={'/restrito/'}>Solicitações</Link>
+          </li>
+        </ul>
+      </Collapse>
     </div>
   );
 };
