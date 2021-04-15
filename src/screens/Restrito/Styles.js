@@ -150,6 +150,7 @@ export const IndexStyles = styled.div`
 export const HeaderStyles = styled.div`
   .navbar {
     background-color: #0d63ac;
+    background-image: linear-gradient(to right, #0d63ac, #72b7f3);
     margin-bottom: 0;
   }
 
