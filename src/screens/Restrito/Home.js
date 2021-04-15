@@ -14,7 +14,7 @@ const Home = props => {
       <Header title={'Portal do Servidor'} />
       <Container fluid="xs md lg">
         <Row>
-          <Col xs={4} md={3} className="menu-lateral">
+          <Col xs={3} md={2} className="menu-lateral">
             <Menu />
           </Col>
         </Row>
