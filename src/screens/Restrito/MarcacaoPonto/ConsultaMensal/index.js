@@ -3,9 +3,9 @@ import { Container, Col, Row } from 'react-bootstrap';
 
 import Header from '../../elements/Header';
 import Menu from '../../elements/Menu';
-import { IndexStyles } from '../../Styles';
+import Formulario from './Formulario';
 
-const Formulario = () => <h1>Relatório por mês</h1>;
+import { IndexStyles } from '../../Styles';
 
 const ConsultaMensal = () => {
   return (
