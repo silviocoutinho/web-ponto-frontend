@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Form, Button, Jumbotron, Badge } from 'react-bootstrap';
 
 import { IndexStyles } from '../../Styles';
+
+import SelectMonth from './../../../components/SelectMonth';
 
 const Formulario = props => {
   return (
@@ -10,22 +12,7 @@ const Formulario = props => {
       <Container className="meio">
         <Jumbotron className="formulario-jumbotron shadow p-5 mb-1 rounded">
           <Form>
-            <p className="formulario-info">
-              <span>
-                Mês:
-                <Form.Control as="select" className="formulario-select">
-                  <option>Default select</option>
-                </Form.Control>
-              </span>
-              <span className="formulario-info-ano">Ano: 2021</span>
-            </p>
-
-            <Form.Group>
-              <Form.File
-                id="exampleFormControlFile1"
-                label="Selecionar Arquivo"
-              />
-            </Form.Group>
+            <SelectMonth label="Selecione o Mês" placeholder="Digite o valor" />
             <Button
               variant="primary"
               type="submit"
