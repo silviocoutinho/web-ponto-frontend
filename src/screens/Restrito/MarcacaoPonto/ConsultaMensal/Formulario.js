@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 import { IndexStyles } from '../../Styles';
 
-import { Input } from 'components-ui-cmjau';
+import { Input, Alert } from 'components-ui-cmjau';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -28,20 +28,17 @@ const Formulario = props => {
           <Formik
             initialValues={{
               firstName: '',
-
               lastName: '',
-
               email: '',
             }}
             validationSchema={SignupSchema}
             onSubmit={values => {
-              // same shape as initial values
-
               console.log(values);
             }}
           >
             {({ errors, touched }) => (
               <Form>
+                <Alert message="teste" type="danger" />
                 <Field
                   name="firstName"
                   as={Input}
