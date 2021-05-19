@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 import { IndexStyles } from '../../Styles';
 
-import { Input, Alert } from 'components-ui-cmjau';
+import { Input, Alert, Button } from 'components-ui-cmjau';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -71,7 +71,7 @@ const Formulario = props => {
                   }
                 />
 
-                <button type="submit">Submit</button>
+                <Button type="submit" label="Enviar" btnStyle="danger" />
               </Form>
             )}
           </Formik>
