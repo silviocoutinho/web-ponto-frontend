@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
-    "components-ui-cmjau": "^0.1.28",
+    "components-ui-cmjau": "^0.1.31",
     "dotenv": "^8.2.0",
     "example-typescript-react-component-library": "^1.0.3",
     "formik": "^2.2.6",
