@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import {
   Alert,
   Button,
@@ -19,6 +21,14 @@ const Formulario = props => {
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1;
 
+  const { REACT_APP_PORT_API, REACT_APP_URL_API, REACT_APP_VERSION_API } =
+    process.env;
+
+  const RESOURCE = 'consulta-mensal';
+  const MAIN_ROUTE = `${REACT_APP_VERSION_API}/pontos/${RESOURCE}`;
+
+  const apiURL = `${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
+
   const handleYear = evt => {
     setFieldYear(evt.target.value);
     setFieldMonth(1);
@@ -26,6 +36,41 @@ const Formulario = props => {
 
   const handleMonth = evt => {
     setFieldMonth(evt.target.value);
+  };
+
+  const getDataFromAPI = () => {
+    const token = localStorage.getItem('token');
+    const config = {
+      Authorization: 'Bearer ' + token,
+    };
+    try {
+      axios
+        .get(apiURL, {
+          params: {
+            year: 2021,
+            month: 5,
+          },
+          headers: config,
+        })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          if (!err.response) {
+            setErrorMessage(
+              'O Servidor está indisponível, contate o Setor de TI!',
+            );
+          } else {
+            const code = err.response.status;
+            const response = err.response.data;
+            setErrorMessage(
+              `Estamos com problemas no Servidor. Mensagem: ${response}. Código: ${code}`,
+            );
+          }
+        });
+    } catch (error) {
+      console.log('Backend is offline!');
+    }
   };
 
   const filterData = () => {
@@ -62,6 +107,7 @@ const Formulario = props => {
           sai3: null,
         },
       ]);
+      getDataFromAPI();
     }
   };
 
