@@ -34,7 +34,7 @@ const Menu = () => {
             <Link to={'/restrito/consulta-mensal'}>Relatório por Mês</Link>
           </li>
           <li>
-            <Link to={'/restrito/'}>Consulta por dia</Link>
+            <Link to={'/restrito/consulta-dia'}>Consulta por dia</Link>
           </li>
         </ul>
       </Collapse>

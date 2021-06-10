@@ -5,7 +5,7 @@ import Header from '../../elements/Header';
 import Menu from '../../elements/Menu';
 import { IndexStyles } from '../../Styles';
 
-const Formulario = () => <h1>Relatório por dia</h1>;
+const Formulario = () => <h1>Página em desenvolvimento</h1>;
 
 const ConsultaMensal = () => {
   return (
@@ -18,6 +18,8 @@ const ConsultaMensal = () => {
           </Col>
           <Col xs={9} md={10} className="principal">
             <Formulario />
+
+            <p>Você receberá um aviso quando estiver diponível!!!</p>
           </Col>
         </Row>
       </Container>
