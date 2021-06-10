@@ -49,10 +49,10 @@ const Menu = () => {
       <Collapse in={openHolerite} appear={true}>
         <ul>
           <li>
-            <Link to={'/restrito/'}>Obter</Link>
+            <Link to={'/restrito/obter-holerite'}>Obter</Link>
           </li>
           <li>
-            <Link to={'/restrito/'}>Solicitações</Link>
+            <Link to={'/restrito/solicitar-holerite'}>Solicitações</Link>
           </li>
         </ul>
       </Collapse>
