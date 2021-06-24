@@ -23,16 +23,23 @@ const Formulario = props => {
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1;
 
-  const { REACT_APP_PORT_API, REACT_APP_URL_API, REACT_APP_VERSION_API } =
-    process.env;
+  const {
+    REACT_APP_PORT_API,
+    REACT_APP_URL_API,
+    REACT_APP_VERSION_API,
+    REACT_APP_ENV,
+  } = process.env;
 
   const RESOURCE = 'consulta-mensal';
   const MAIN_ROUTE = `${REACT_APP_VERSION_API}/pontos/${RESOURCE}`;
+  const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
 
-  const apiURL = `${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
+  const apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
+
+  axios.defaults.baseURL = apiURL;
 
   const handleYear = evt => {
-    setFieldYear(evt.target.value);    
+    setFieldYear(evt.target.value);
   };
 
   const handleMonth = evt => {
@@ -45,7 +52,6 @@ const Formulario = props => {
       Authorization: 'Bearer ' + token,
     };
     try {
-      
       axios
         .get(apiURL, {
           params: {
@@ -54,11 +60,12 @@ const Formulario = props => {
           },
           headers: configHeadersAPI,
         })
-        .then(res => {      
-          if (res.data.length === 0)
-          {
+        .then(res => {
+          if (res.data.length === 0) {
             setTypeOfErrorMessage('warning');
-            setErrorMessage('Não existem informações para o período consultado!');
+            setErrorMessage(
+              'Não existem informações para o período consultado!',
+            );
             setDataTimeCard(null);
             return;
           }
@@ -66,14 +73,18 @@ const Formulario = props => {
           setErrorMessage(null);
           setDataTimeCard(arrayDataToTimeCard);
         })
-        .catch(err => {          
+        .catch(err => {
           setDataTimeCard(null);
-
           if (!err.response) {
             setTypeOfErrorMessage('danger');
             setErrorMessage(
               'O Servidor está indisponível, contate o Setor de TI!',
             );
+          } else if (err.response.status === 400) {
+            const code = err.response.status;
+            const response = err.response.data.error;
+            setTypeOfErrorMessage('danger');
+            setErrorMessage(`${response}.`);
           } else {
             const code = err.response.status;
             const response = err.response.data;
@@ -89,8 +100,9 @@ const Formulario = props => {
   };
 
   const filterData = () => {
-    const selectedYears = years.filter(element => Number(element.value) === Number(fieldYear)).map(element => element.label);
-    console.log(selectedYears[0]);
+    const selectedYears = years
+      .filter(element => Number(element.value) === Number(fieldYear))
+      .map(element => element.label);
 
     if (
       currentYear === Number(selectedYears) &&
@@ -101,7 +113,7 @@ const Formulario = props => {
       setErrorMessage(
         'Mês selecionado inválido. Selecione um mês igual ou inferior ao atual!',
       );
-    } else {     
+    } else {
       getDataFromAPI(Number(fieldMonth), selectedYears);
     }
   };
@@ -137,13 +149,11 @@ const Formulario = props => {
           </div>
         </GridContainer>
         {dataTimeCard && (
-          <TimeCard
-            data={dataTimeCard}
-            head={headTimeCard}
-            workingTime={8}
-          />
+          <TimeCard data={dataTimeCard} head={headTimeCard} workingTime={8} />
         )}
-        {errorMessage && <Alert message={errorMessage} type={typeOfErrorMessage} />}
+        {errorMessage && (
+          <Alert message={errorMessage} type={typeOfErrorMessage} />
+        )}
       </Container>
     </IndexStyles>
   );
