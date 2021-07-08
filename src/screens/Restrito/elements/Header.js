@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavDropdown, Image, Badge } from 'react-bootstrap';
 import { BsFillBellFill as BsFill } from 'react-icons/bs';
@@ -8,7 +9,7 @@ import { HeaderStyles } from '../Styles';
 import logo from '../../Resource/images/logo-small6.jpg';
 
 const Header = props => {
-  const navAlertIcon = 1;
+  const navAlertIcon = 0;
   return (
     <HeaderStyles>
       <header>
@@ -38,7 +39,7 @@ const Header = props => {
                 Minha Conta
               </NavDropdown.Item>
               <NavDropdown.Item eventKey="2" href="restrito/alterar-senha">
-                Alterar Senha
+                <Link to={'/restrito/alterar-senha'}>Alterar Senha</Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item eventKey="3" onClick={props.logout}>

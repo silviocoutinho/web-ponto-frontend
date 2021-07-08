@@ -197,4 +197,9 @@ export const HeaderStyles = styled.div`
   .navbar-nav .show > .nav-link {
     color: #fff;
   }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
 `;
