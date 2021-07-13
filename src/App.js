@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, HashRouter as Router } from 'react-router-dom';
 
 import store from './redux';
 import { Provider } from 'react-redux';
@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <Router basename="/index.html">
           <Route exact path="/" component={Login} />
           <Route path="/admin" component={Admin} />
           <Route path="/restrito" component={Restrito} />
