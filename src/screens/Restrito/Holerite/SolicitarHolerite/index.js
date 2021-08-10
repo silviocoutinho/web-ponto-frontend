@@ -19,7 +19,7 @@ const ConsultaMensal = () => {
           <Col xs={9} md={10} className="principal">
             <Formulario />
 
-            <p>Você receberá um aviso quando estiver diponível!!!</p>
+            <p>Você receberá um aviso quando estiver disponível!!!</p>
           </Col>
         </Row>
       </Container>
