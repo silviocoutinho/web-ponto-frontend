@@ -8,6 +8,7 @@ export function* login(action) {
 
   const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
   const url = `${envURL}${REACT_APP_URL}:${REACT_APP_PORT_API}`;
+  axios.defaults.baseURL = url;
 
   let token = localStorage.getItem('token');
 
