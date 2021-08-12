@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Nav, Collapse } from 'react-bootstrap';
 
@@ -10,7 +10,11 @@ import { BsFillGridFill } from 'react-icons/bs';
 
 const Menu = () => {
   const [openPontos, setOpenPontos] = useState(true);
-  const [openHolerite, setOpenHolerite] = useState(true);
+  const [openHolerite, setOpenHolerite] = useState(false);
+
+  useEffect(() => {
+    console.log(1);
+  }, [openPontos]);
 
   return (
     <div>
