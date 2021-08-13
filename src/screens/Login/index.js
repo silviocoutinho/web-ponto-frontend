@@ -49,9 +49,8 @@ class Login extends Component {
     return (
       <IndexStyles>
         <Header title="Câmara Municipal de Jahu" />
-        <Container className="meio">
+        <Container className="meio" fluid="lg">
           <h1 className="login-title mt-5 text-center">Entrar no Sistema</h1>
-          <h2>{}</h2>
           <Row>
             <Col className="mx-auto" sm={9} md={7} lg={5}>
               <Jumbotron className="shadow p-5 mb-2 rounded">
@@ -89,11 +88,7 @@ class Login extends Component {
             </Col>
           </Row>
         </Container>
-        <Row>
-          <Col>
-            <Footer />
-          </Col>
-        </Row>
+        <Footer />
       </IndexStyles>
     );
   }

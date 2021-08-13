@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Nav, Collapse } from 'react-bootstrap';
 
@@ -10,11 +10,7 @@ import { BsFillGridFill } from 'react-icons/bs';
 
 const Menu = () => {
   const [openPontos, setOpenPontos] = useState(true);
-  const [openHolerite, setOpenHolerite] = useState(false);
-
-  useEffect(() => {
-    console.log(1);
-  }, [openPontos]);
+  const [openHolerite, setOpenHolerite] = useState(true);
 
   return (
     <div>
@@ -28,11 +24,12 @@ const Menu = () => {
         variant="secondary"
         className="menu-lateral-button"
         onClick={() => setOpenPontos(!openPontos)}
+        aria-expanded={openPontos}
       >
         <BsFillCalendarFill className="menu-lateral-button-icone" />
         Registro de Ponto
       </Button>
-      <Collapse in={openPontos} appear={true}>
+      <Collapse in={openPontos} appear={false}>
         <ul>
           <li>
             <Link to={'/restrito/consulta-mensal'}>Relatório por Mês</Link>
@@ -46,11 +43,12 @@ const Menu = () => {
         variant="secondary"
         className="menu-lateral-button"
         onClick={() => setOpenHolerite(!openHolerite)}
+        aria-expanded={openHolerite}
       >
         <BsFillArchiveFill className="menu-lateral-button-icone" />
         Holerite
       </Button>
-      <Collapse in={openHolerite} appear={true}>
+      <Collapse in={openHolerite} appear={false}>
         <ul>
           <li>
             <Link to={'/restrito/obter-holerite'}>Obter</Link>

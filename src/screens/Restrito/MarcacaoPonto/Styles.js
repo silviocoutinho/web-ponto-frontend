@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const FormStyles = styled.div`
   font-family: 'Titillium Web', sans-serif;
 
-  padding: 1rem;
+  padding: 0rem;
 
   div {
     background-color: transparent;
