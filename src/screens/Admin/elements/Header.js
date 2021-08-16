@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavDropdown, Image, Badge } from 'react-bootstrap';
 import { BsFillBellFill as BsFill } from 'react-icons/bs';
@@ -8,7 +9,7 @@ import { HeaderStyles } from '../Styles';
 import logo from '../../Resource/images/logo-small6.jpg';
 
 const Header = props => {
-  const navAlertIcon = 1;
+  const navAlertIcon = 0;
   return (
     <HeaderStyles>
       <header>
@@ -29,6 +30,27 @@ const Header = props => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <Nav className="ml-auto" activeKey="/home">
+            {props.auth.user.adm && (
+              <NavDropdown
+                title="Gestão de Holerite"
+                id="basic-nav-dropdown"
+                className="menu-usuario"
+              >
+                <NavDropdown.Item eventKey="1" href="/admin/upload-payslip">
+                  Enviar por Lote
+                </NavDropdown.Item>
+                <NavDropdown.Item eventKey="2" href="restrito/minha-conta">
+                  Substituir um Holerite
+                </NavDropdown.Item>
+                <NavDropdown.Item eventKey="2" href="restrito/minha-conta">
+                  Remover um Holerite
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item eventKey="3" onClick={props.logout}>
+                  Emitir aviso aos funcionários
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
             <NavDropdown
               title={props.auth.user.nome}
               id="basic-nav-dropdown"
@@ -38,7 +60,7 @@ const Header = props => {
                 Minha Conta
               </NavDropdown.Item>
               <NavDropdown.Item eventKey="2" href="restrito/alterar-senha">
-                Alterar Senha
+                <Link to={'/restrito/alterar-senha'}>Alterar Senha</Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item eventKey="3" onClick={props.logout}>

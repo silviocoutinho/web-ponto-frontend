@@ -1,24 +1,34 @@
 import React from 'react';
-import { Route, Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import ActionCreator from '../../redux/actionCreators';
+
 import Home from './Home';
-const Users = props => <h1>Users Admin</h1>;
+import Rotas from './elements/Rotas';
+
+const UplodFilePayslip = props => <h1>Users Admin</h1>;
 
 const Admin = props => {
-  const path = props.match.path;
+  const { path } = props.match;
   if (!props.auth.isAuth) {
     return <Redirect to="/login" />;
   }
   if (props.auth.user.adm !== true) {
     return <Redirect to="/restrito" />;
   }
+
   return (
     <div>
-      <div>
-        <Route path={`${path}/`} exact component={Home} />
-        <Route path="/restrito" component={Users} />
-      </div>
+      <Switch>
+        <Route
+          exact
+          path={`${path}/`}
+          component={() => <Home match={path} />}
+        />
+        <Rotas path={path} />
+      </Switch>
     </div>
   );
 };

@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 
 import Header from './Header';
 import Login from './screens/Login/index';
-import Admin from './screens/Admin';
 import Restrito from './screens/Restrito';
 class App extends Component {
   render() {
@@ -14,7 +13,6 @@ class App extends Component {
       <Provider store={store}>
         <Router basename="/index.html">
           <Route exact path="/" component={Login} />
-          <Route path="/admin" component={Admin} />
           <Route path="/restrito" component={Restrito} />
           <Route exact path="/login" component={Login} />
         </Router>

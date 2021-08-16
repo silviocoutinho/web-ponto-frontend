@@ -1,13 +1,13 @@
 import React from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 
-import Header from '../../elements/Header';
-import Menu from '../../elements/Menu';
+import Header from '../../../Restrito/elements/Header';
 import Form from './Form';
 
 import { IndexStyles } from '../../Styles';
+import Menu from '../../elements/Menu';
 
-const ConsultaMensal = () => {
+const EnviarHolerite = () => {
   return (
     <IndexStyles>
       <Header title={'Portal do Servidor'} />
@@ -25,4 +25,4 @@ const ConsultaMensal = () => {
   );
 };
 
-export default ConsultaMensal;
+export default EnviarHolerite;
