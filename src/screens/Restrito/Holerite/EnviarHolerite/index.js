@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { Container, Col, Row } from 'react-bootstrap';
 
 import Header from '../../../Restrito/elements/Header';
@@ -7,7 +9,14 @@ import Form from './Form';
 import { IndexStyles } from '../../Styles';
 import Menu from '../../elements/Menu';
 
-const EnviarHolerite = () => {
+const EnviarHolerite = props => {
+  if (!props.auth.isAuth) {
+    return <Redirect to="/login" />;
+  }
+  if (props.auth.user.adm !== true) {
+    return <Redirect to="/restrito" />;
+  }
+
   return (
     <IndexStyles>
       <Header title={'Portal do Servidor'} />
@@ -25,4 +34,10 @@ const EnviarHolerite = () => {
   );
 };
 
-export default EnviarHolerite;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps)(EnviarHolerite);

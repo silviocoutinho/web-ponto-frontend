@@ -1,5 +1,4 @@
 import axios from 'axios';
-import toArray from 'lodash/toArray';
 import { setMessage } from './MessageNotification';
 //startDate="2021-05-05"&endDate="2021-05-06"
 const {
@@ -9,7 +8,7 @@ const {
   REACT_APP_ENV,
 } = process.env;
 
-const RESOURCE = 'consulta-intervalo-datas';
+const RESOURCE = 'send-payslip-pdf';
 const MAIN_ROUTE = `${REACT_APP_VERSION_API}/pontos/${RESOURCE}`;
 const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
 
@@ -18,11 +17,10 @@ const apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE
 axios.defaults.baseURL = apiURL;
 
 const getDataFromAPI = (
-  startDate,
-  endDate,
+  month,
+  year,
   setTypeOfErrorMessage,
   setErrorMessage,
-  setDataTimeCard,
 ) => {
   const token = localStorage.getItem('token');
 
@@ -31,31 +29,29 @@ const getDataFromAPI = (
   };
   try {
     axios
-      .get(apiURL, {
+      .post(apiURL, {
         params: {
-          startDate,
-          endDate,
+          month,
+          year,
         },
         headers: configHeadersAPI,
       })
       .then(res => {
         if (res.data.length === 0) {
+          //TODO: Revisar Mensagens de Alerta!!!
           setMessage(
             setTypeOfErrorMessage,
             setErrorMessage,
             'warning',
-            'Não existem informações para o período consultado!',
+            'PERSONALIZAR!',
           );
-          setDataTimeCard(null);
           return;
         }
-        const arrayDataToTimeCard = toArray(res.data);
-        setDataTimeCard(arrayDataToTimeCard);
         setMessage(setTypeOfErrorMessage, setErrorMessage, 'warning', null);
       })
       .catch(err => {
-        setDataTimeCard(null);
         if (!err.response) {
+          //TODO: Revisar Mensagens de Alerta!!!
           setMessage(
             setTypeOfErrorMessage,
             setErrorMessage,
@@ -74,6 +70,7 @@ const getDataFromAPI = (
         } else {
           const code = err.response.status;
           const response = err.response.data;
+          //TODO: Revisar Mensagens de Alerta!!!
           setMessage(
             setTypeOfErrorMessage,
             setErrorMessage,

@@ -12,7 +12,6 @@ import {
 
 import { IndexStyles } from '../../Styles';
 import { months, years, headTimeCard } from './Dados';
-import { head } from 'lodash';
 
 const Formulario = props => {
   const [dataTimeCard, setDataTimeCard] = useState(null);
