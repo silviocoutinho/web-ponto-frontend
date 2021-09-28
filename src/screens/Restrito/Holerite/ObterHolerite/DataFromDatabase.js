@@ -9,8 +9,8 @@ const {
   REACT_APP_ENV,
 } = process.env;
 
-const RESOURCE = 'consulta-intervalo-datas';
-const MAIN_ROUTE = `${REACT_APP_VERSION_API}/pontos/${RESOURCE}`;
+const RESOURCE = 'payslip';
+const MAIN_ROUTE = `${REACT_APP_VERSION_API}/${RESOURCE}`;
 const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
 
 const apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
@@ -18,8 +18,7 @@ const apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE
 axios.defaults.baseURL = apiURL;
 
 const getDataFromAPI = (
-  startDate,
-  endDate,
+  year,
   setTypeOfErrorMessage,
   setErrorMessage,
   setDataTimeCard,
@@ -31,11 +30,7 @@ const getDataFromAPI = (
   };
   try {
     axios
-      .get(apiURL, {
-        params: {
-          startDate,
-          endDate,
-        },
+      .get(`${apiURL}/${year}`, {
         headers: configHeadersAPI,
       })
       .then(res => {
@@ -63,7 +58,6 @@ const getDataFromAPI = (
             'O Servidor está indisponível, contate o Setor de TI!',
           );
         } else if (err.response.status === 400) {
-          const code = err.response.status;
           const response = err.response.data.error;
           setMessage(
             setTypeOfErrorMessage,

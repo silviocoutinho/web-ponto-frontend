@@ -1,29 +1,22 @@
 import { getDataFromAPI } from './DataFromDatabase';
-import { setMessage } from './MessageNotification';
 
 const filterData = (
-  starDate,
-  endDate,
+  years,
+  fieldYear,
   setTypeOfErrorMessage,
   setErrorMessage,
   setDataTimeCard,
 ) => {
-  if (starDate > endDate) {
-    setMessage(
-      setTypeOfErrorMessage,
-      setErrorMessage,
-      'danger',
-      'Mês selecionado inválido. Selecione um mês igual ou inferior ao atual!',
-    );
-  } else {
-    getDataFromAPI(
-      starDate,
-      endDate,
-      setTypeOfErrorMessage,
-      setErrorMessage,
-      setDataTimeCard,
-    );
-  }
+  const yearToGetData = years.filter(arrayOfYears => {
+    return arrayOfYears.value === fieldYear.toString();
+  });
+  console.log(yearToGetData[0].label);
+  getDataFromAPI(
+    yearToGetData[0].label,
+    setTypeOfErrorMessage,
+    setErrorMessage,
+    setDataTimeCard,
+  );
 };
 
 export { filterData };
