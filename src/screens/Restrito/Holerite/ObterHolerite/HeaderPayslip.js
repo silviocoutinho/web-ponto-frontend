@@ -1,7 +1,7 @@
 const HeaderPayslip = {
-  month: 'Mês',
-  year: 'Ano',
-  fileNamePayslip: 'Download',
+  referencia: 'Competência',
+  tipo: 'Tipo',
+  link: 'Download',
 };
 
 export { HeaderPayslip };

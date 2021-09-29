@@ -9,7 +9,7 @@ import {
   Button,
   GridContainer,
   Select,
-  DataTable,
+  PayslipTable,
 } from 'components-ui-cmjau';
 
 import { IndexStyles } from '../../Styles';
@@ -89,7 +89,7 @@ const Form = props => {
             </div>
           </GridContainer>
           {dataTimeCard && (
-            <DataTable data={dataTimeCard} head={HeaderPayslip} />
+            <PayslipTable data={dataTimeCard} head={HeaderPayslip} pathToFile={'server'} />
           )}
           {errorMessage && (
             <Alert message={errorMessage} type={typeOfErrorMessage} />
