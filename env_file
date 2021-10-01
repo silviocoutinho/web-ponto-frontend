@@ -4,3 +4,5 @@ REACT_APP_URL="http://localhost"
 REACT_APP_URL_API="http://localhost"
 REACT_APP_VERSION_API="v1"
 REACT_APP_ENV= 'test'
+REACT_APP_FILE_SERVER= 'http://server'
+REACT_APP_PATH_FILES_STORED= 'holerites'

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import { Container } from 'react-bootstrap';
 
-import SelectDate from '../../../components/SelectDate';
-
 import {
   Alert,
   Button,
@@ -18,17 +16,22 @@ import { FormStyles } from '../Styles';
 import { HeaderPayslip } from './HeaderPayslip';
 import { years } from './DataToForm';
 import { filterData } from './FilterData';
+import { number } from 'prop-types';
+
+const { REACT_APP_FILE_SERVER, REACT_APP_PATH_FILES_STORED, REACT_APP_ENV } =
+  process.env;
+
+const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
+
+const fileServerURL = `${envURL}${REACT_APP_FILE_SERVER}/${REACT_APP_PATH_FILES_STORED}`;
 
 const Form = props => {
-  const [dataTimeCard, setDataTimeCard] = useState(null);
+  const [dataPayslip, setDataPayslip] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
 
   const [fieldYear, setFieldYear] = useState(1);
   const currentYear = new Date().getFullYear();
-
-  let startDate;
-  let endDate;
 
   useEffect(() => {
     setFieldYear(() => {
@@ -44,8 +47,11 @@ const Form = props => {
     setFieldYear(evt.target.value);
   };
 
-  const clearData = () => {
-    console.log(fieldYear);
+  const getYearFromSelect = () => {
+    const yearToCombobox = years.filter(arrayOfYears => {
+      return arrayOfYears.value === fieldYear.toString();
+    });
+    return yearToCombobox[0].label;
   };
 
   return (
@@ -74,22 +80,26 @@ const Form = props => {
                     fieldYear,
                     setTypeOfErrorMessage,
                     setErrorMessage,
-                    setDataTimeCard,
+                    setDataPayslip,
                   )
                 }
               />
             </div>
             <div className="button-form">
               <Button
-                label="Limpar"
-                btnStyle="success"
+                label="Teste"
+                btnStyle="danger"
                 type="button"
-                onClick={() => clearData()}
+                onClick={() => console.log(getYearFromSelect())}
               />
             </div>
           </GridContainer>
-          {dataTimeCard && (
-            <PayslipTable data={dataTimeCard} head={HeaderPayslip} pathToFile={'server'} />
+          {dataPayslip && (
+            <PayslipTable
+              data={dataPayslip}
+              head={HeaderPayslip}
+              pathToFile={fileServerURL + '/' + getYearFromSelect()}
+            />
           )}
           {errorMessage && (
             <Alert message={errorMessage} type={typeOfErrorMessage} />
