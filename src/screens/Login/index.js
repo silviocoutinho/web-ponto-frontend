@@ -36,12 +36,19 @@ class Login extends Component {
     const { email, passwd } = this.state.form;
     this.props.login(email, passwd);
   };
+  validateToken = () => {
+    this.props.validateToken();
+  };
 
   render() {
     console.log('Auth:', this.props.auth);
+    if (!this.props.auth.isTokenValid && !this.props.auth.isValidingToken) {
+      this.validateToken();
+    }
     if (this.props.auth.isAuth) {
       return <Redirect to="/restrito" />;
     }
+
     return (
       <IndexStyles>
         <Header title="Câmara Municipal de Jahu" />
@@ -100,6 +107,7 @@ const mapDispatchToProps = dispatch => {
   return {
     login: (email, passwd) =>
       dispatch(ActionCreator.signinRequest(email, passwd)),
+    validateToken: () => dispatch(ActionCreator.validateTokenRequest()),
   };
 };
 
