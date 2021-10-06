@@ -16,7 +16,6 @@ import { FormStyles } from '../Styles';
 import { HeaderPayslip } from './HeaderPayslip';
 import { years } from './DataToForm';
 import { filterData } from './FilterData';
-import { number } from 'prop-types';
 
 const { REACT_APP_FILE_SERVER, REACT_APP_PATH_FILES_STORED, REACT_APP_ENV } =
   process.env;
@@ -26,6 +25,7 @@ const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
 const fileServerURL = `${envURL}${REACT_APP_FILE_SERVER}/${REACT_APP_PATH_FILES_STORED}`;
 
 const Form = props => {
+
   const [dataPayslip, setDataPayslip] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
@@ -86,12 +86,7 @@ const Form = props => {
               />
             </div>
             <div className="button-form">
-              <Button
-                label="Teste"
-                btnStyle="danger"
-                type="button"
-                onClick={() => console.log(getYearFromSelect())}
-              />
+              
             </div>
           </GridContainer>
           {dataPayslip && (
