@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 import { Container } from 'react-bootstrap';
 
-import { Alert, Button, GridContainer, Select } from 'components-ui-cmjau';
+import { Alert, Button, GridContainer, Select, Input } from 'components-ui-cmjau';
 import FileUpload from '../../../components/FileUpload';
 
 import { IndexStyles } from '../../Styles';
-import { FormStyles } from '../Styles';
+import { FormStyles } from './Styles';
 
 import { filterData } from './FilterData';
 import { months, years } from './DataToSelects';
@@ -24,6 +24,7 @@ const Form = props => {
   const handleMonth = evt => {
     setFieldMonth(evt.target.value);
   };
+
 
   return (
     <IndexStyles>
@@ -50,6 +51,15 @@ const Form = props => {
           </GridContainer>
           <GridContainer columns={1}>
             <div className="select-container">
+              <Input
+                field="description"
+                label="Referência"
+                placeholder="Digite aqui a Referência do Holerite"
+              />
+            </div>
+          </GridContainer>
+          <GridContainer columns={1}>
+            <div className="select-container">
               <FileUpload
                 label="Selecionar Lote de Holerites"
                 field="fileHolerites"
@@ -58,7 +68,12 @@ const Form = props => {
           </GridContainer>
           <GridContainer columns={2}>
             <div className="button-form">
-              <Button label="Filtrar" btnStyle="primary" type="button" />
+              <Button label="Filtrar" btnStyle="primary" type="button" onClick={() => filterData( 
+                fieldMonth,
+                fieldYear,
+                setTypeOfErrorMessage,
+                setErrorMessage
+                )} />
             </div>
             <div className="button-form">
               <Button label="Limpar" btnStyle="success" type="button" />

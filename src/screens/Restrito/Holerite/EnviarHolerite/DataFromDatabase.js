@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setMessage } from './MessageNotification';
-//startDate="2021-05-05"&endDate="2021-05-06"
+//{{base_url_api_pontos}}/v1/payslip/upload/pdf?month=10&year=2021&description=09/2021
 const {
   REACT_APP_PORT_API,
   REACT_APP_URL_API,
@@ -8,11 +8,11 @@ const {
   REACT_APP_ENV,
 } = process.env;
 
-const RESOURCE = 'send-payslip-pdf';
-const MAIN_ROUTE = `${REACT_APP_VERSION_API}/pontos/${RESOURCE}`;
+const RESOURCE = 'upload/pdf';
+const MAIN_ROUTE = `${REACT_APP_VERSION_API}/payslip/${RESOURCE}`;
 const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
 
-const apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
+let apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
 
 axios.defaults.baseURL = apiURL;
 
@@ -22,20 +22,17 @@ const getDataFromAPI = (
   setTypeOfErrorMessage,
   setErrorMessage,
 ) => {
+  const formData = new FormData();
   const token = localStorage.getItem('token');
-
-  const configHeadersAPI = {
-    Authorization: 'Bearer ' + token,
-  };
+  const description = '10/2021';
+  apiURL = `${apiURL}?month=10&year=2021&description=09/2021`;  
   try {
-    axios
-      .post(apiURL, {
-        params: {
-          month,
-          year,
-        },
-        headers: configHeadersAPI,
-      })
+    console.log(apiURL);
+    axios.post(apiURL, formData ,{ 
+      headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: 'Bearer ' + token
+     }})
       .then(res => {
         if (res.data.length === 0) {
           //TODO: Revisar Mensagens de Alerta!!!
