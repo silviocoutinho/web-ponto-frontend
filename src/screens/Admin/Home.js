@@ -4,7 +4,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 
 import ActionCreator from '../../redux/actionCreators';
 import Header from './elements/Header';
-import Menu from './elements/Menu';
+import MenuAdm from './elements/MenuAdm';
 
 import { IndexStyles } from './Styles';
 
@@ -15,7 +15,7 @@ const Home = props => {
       <Container fluid="xs md lg">
         <Row>
           <Col xs={3} md={2} className="menu-lateral">
-            <Menu />
+            <MenuAdm />
           </Col>
         </Row>
       </Container>

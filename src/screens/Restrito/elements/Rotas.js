@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link, Route, Router, Switch } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 import PageNotFound from '../elements/404';
 import ConsultaMensal from '../MarcacaoPonto/ConsultaMensal';
@@ -11,6 +11,8 @@ import SolicitarHolerite from '../Holerite/SolicitarHolerite';
 
 //Dados dos usuarios
 import AlterarSenha from '../Usuarios/AlterarSenha';
+
+import RotasAdm from './RotasAdm';
 
 const Rotas = props => {
   return (
@@ -41,6 +43,9 @@ const Rotas = props => {
           path={`${props.path}/alterar-senha`}
           component={AlterarSenha}
         />
+
+        <RotasAdm path={props.path} />
+
         <Route path="*" exact={true} component={PageNotFound} />
       </Switch>
     </div>

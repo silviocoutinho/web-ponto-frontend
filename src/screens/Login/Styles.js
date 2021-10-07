@@ -25,16 +25,13 @@ export const IndexStyles = styled.div`
     color: #0083b7;
   }
   .meio h1 {
-    text-align: left;
     text-transform: uppercase;
-    margin-top: 2rem;
   }
 `;
 
 export const HeaderStyles = styled.div`
   .navbar {
     background-color: #0d63ac;
-    margin-bottom: 1.25rem;
   }
 
   .navbar-brand,

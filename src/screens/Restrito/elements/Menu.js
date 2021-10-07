@@ -24,11 +24,12 @@ const Menu = () => {
         variant="secondary"
         className="menu-lateral-button"
         onClick={() => setOpenPontos(!openPontos)}
+        aria-expanded={openPontos}
       >
         <BsFillCalendarFill className="menu-lateral-button-icone" />
         Registro de Ponto
       </Button>
-      <Collapse in={openPontos} appear={true}>
+      <Collapse in={openPontos} appear={false}>
         <ul>
           <li>
             <Link to={'/restrito/consulta-mensal'}>Relatório por Mês</Link>
@@ -42,11 +43,12 @@ const Menu = () => {
         variant="secondary"
         className="menu-lateral-button"
         onClick={() => setOpenHolerite(!openHolerite)}
+        aria-expanded={openHolerite}
       >
         <BsFillArchiveFill className="menu-lateral-button-icone" />
         Holerite
       </Button>
-      <Collapse in={openHolerite} appear={true}>
+      <Collapse in={openHolerite} appear={false}>
         <ul>
           <li>
             <Link to={'/restrito/obter-holerite'}>Obter</Link>
