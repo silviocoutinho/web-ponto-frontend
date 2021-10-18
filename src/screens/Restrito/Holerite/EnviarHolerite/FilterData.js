@@ -1,10 +1,15 @@
 import { getDataFromAPI } from './DataFromDatabase';
 import { setMessage } from './MessageNotification';
 
-
-const filterData = (month, year, setTypeOfErrorMessage, setErrorMessage) => {
-  const currentYear = 2021;// new Date.now().getFullYear();
-  const currentMonth = 10// new Date.now().getMonth();
+const filterData = (
+  month,
+  year,
+  description,
+  setTypeOfErrorMessage,
+  setErrorMessage,
+) => {
+  const currentYear = 2021; // new Date.now().getFullYear();
+  const currentMonth = 10; // new Date.now().getMonth();
   if (year > currentYear) {
     setMessage(
       setTypeOfErrorMessage,
@@ -20,7 +25,7 @@ const filterData = (month, year, setTypeOfErrorMessage, setErrorMessage) => {
       'Mês selecionado inválido. Selecione um mês igual ou inferior ao atual!',
     );
   } else {    
-    getDataFromAPI(month, year, setTypeOfErrorMessage, setErrorMessage);
+    getDataFromAPI(month, year, description, setTypeOfErrorMessage, setErrorMessage);
   }
 };
 
