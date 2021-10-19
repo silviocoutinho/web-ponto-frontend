@@ -4,7 +4,6 @@ import { Route, HashRouter as Router } from 'react-router-dom';
 import store from './redux';
 import { Provider } from 'react-redux';
 
-import Header from './Header';
 import Login from './screens/Login/index';
 import Restrito from './screens/Restrito';
 class App extends Component {
