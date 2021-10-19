@@ -45,7 +45,7 @@ class Login extends Component {
     if (!this.props.auth.isTokenValid && !this.props.auth.isValidingToken) {
       this.validateToken();
     }
-    if (this.props.auth.isAuth) {
+    if (this.props.auth.isAuth && this.props.auth.isTokenValid) {
       return <Redirect to="/restrito" />;
     }
 
