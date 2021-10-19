@@ -25,6 +25,8 @@ const filterData = (
       setTypeOfErrorMessage,
       setErrorMessage,
     );
+  } else {    
+    getDataFromAPI(month, year, description, setTypeOfErrorMessage, setErrorMessage);
   }
 };
 

@@ -12,9 +12,9 @@ const RESOURCE = 'upload/pdf';
 const MAIN_ROUTE = `${REACT_APP_VERSION_API}/payslip/${RESOURCE}`;
 const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
 
-let apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
+const baseURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
 
-axios.defaults.baseURL = apiURL;
+axios.defaults.baseURL = baseURL;
 
 const getDataFromAPI = (
   month,
@@ -26,14 +26,15 @@ const getDataFromAPI = (
   const formData = new FormData();
   const token = localStorage.getItem('token');
 
-  console.log(apiURL);
+  const fileToUpload = document.querySelector('input[type="file"]').files[0];
   month = month.toString().padStart(2, '0');
+  formData.append('file', fileToUpload);
 
-  apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}?month=${month}&year=${year}&description=${description}`;
+  const resourceURL = `${baseURL}?month=${month}&year=${year}&description=${description}`;
   try {
-    console.log(apiURL);
+    console.log(resourceURL);
     axios
-      .post(apiURL, formData, {
+      .post(resourceURL, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: 'Bearer ' + token,
@@ -46,11 +47,16 @@ const getDataFromAPI = (
             setTypeOfErrorMessage,
             setErrorMessage,
             'warning',
-            'PERSONALIZAR!',
+            'Erro de serviço. Informar o TI!',
           );
           return;
         }
-        setMessage(setTypeOfErrorMessage, setErrorMessage, 'warning', null);
+        setMessage(
+          setTypeOfErrorMessage,
+          setErrorMessage,
+          'success',
+          res.data.message,
+        );
       })
       .catch(err => {
         if (!err.response) {

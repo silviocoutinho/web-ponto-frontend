@@ -10,6 +10,7 @@ import {
   Input,
 } from 'components-ui-cmjau';
 import FileUpload from '../../../components/FileUpload';
+import RadioGroup from '../../../components/RadioGroup';
 
 import { IndexStyles } from '../../Styles';
 import { FormStyles } from './Styles';
@@ -50,6 +51,8 @@ const Form = props => {
                 field="month"
                 label="Mês"
                 onChange={handleMonth}
+                value={fieldMonth}
+                selectedValue={fieldMonth}
               />
             </div>
             <div className="select-container">
@@ -58,16 +61,26 @@ const Form = props => {
                 field="year"
                 label="Ano"
                 onChange={handleYear}
+                value={fieldYear}
+                selectedValue={fieldMonth}
               />
             </div>
           </GridContainer>
-          <GridContainer columns={1}>
+          <GridContainer columns={2}>
             <div className="select-container">
               <Input
                 field="description"
                 label="Referência"
                 onChange={handleDescription}
                 placeholder="Digite aqui a Referência do Holerite"
+                onChange={handleDescription}
+                value={fieldDescription}
+              />
+              <RadioGroup
+                label="Tipo de envio"
+                field="radio-tipo-envio"
+                onChange=""
+                name="tipoEnvio"
               />
             </div>
           </GridContainer>
@@ -97,7 +110,12 @@ const Form = props => {
               />
             </div>
             <div className="button-form">
-              <Button label="Limpar" btnStyle="success" type="button" />
+              <Button
+                label="Limpar"
+                btnStyle="success"
+                type="button"
+                onClick={() => clearForm()}
+              />
             </div>
           </GridContainer>
 
