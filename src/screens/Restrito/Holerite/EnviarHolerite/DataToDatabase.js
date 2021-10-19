@@ -19,20 +19,26 @@ axios.defaults.baseURL = apiURL;
 const getDataFromAPI = (
   month,
   year,
+  description,
   setTypeOfErrorMessage,
   setErrorMessage,
 ) => {
   const formData = new FormData();
   const token = localStorage.getItem('token');
-  const description = '10/2021';
-  apiURL = `${apiURL}?month=10&year=2021&description=09/2021`;  
+
+  console.log(apiURL);
+  month = month.toString().padStart(2, '0');
+
+  apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}?month=${month}&year=${year}&description=${description}`;
   try {
     console.log(apiURL);
-    axios.post(apiURL, formData ,{ 
-      headers: {
-      'Content-Type': 'multipart/form-data',
-      Authorization: 'Bearer ' + token
-     }})
+    axios
+      .post(apiURL, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: 'Bearer ' + token,
+        },
+      })
       .then(res => {
         if (res.data.length === 0) {
           //TODO: Revisar Mensagens de Alerta!!!

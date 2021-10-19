@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 
 import { Container } from 'react-bootstrap';
 
-import { Alert, Button, GridContainer, Select, Input } from 'components-ui-cmjau';
+import {
+  Alert,
+  Button,
+  GridContainer,
+  Select,
+  Input,
+} from 'components-ui-cmjau';
 import FileUpload from '../../../components/FileUpload';
 
 import { IndexStyles } from '../../Styles';
@@ -11,11 +17,14 @@ import { FormStyles } from './Styles';
 import { filterData } from './FilterData';
 import { months, years } from './DataToSelects';
 
+import { getLabelYearFromArray, getIndexMonthFromArray } from '../utils';
+
 const Form = props => {
   const [errorMessage, setErrorMessage] = useState('');
   const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
   const [fieldMonth, setFieldMonth] = useState(1);
   const [fieldYear, setFieldYear] = useState(1);
+  const [fieldDescription, setFieldDescription] = useState('');
 
   const handleYear = evt => {
     setFieldYear(evt.target.value);
@@ -25,6 +34,9 @@ const Form = props => {
     setFieldMonth(evt.target.value);
   };
 
+  const handleDescription = evt => {
+    setFieldDescription(evt.target.value);
+  };
 
   return (
     <IndexStyles>
@@ -54,6 +66,7 @@ const Form = props => {
               <Input
                 field="description"
                 label="Referência"
+                onChange={handleDescription}
                 placeholder="Digite aqui a Referência do Holerite"
               />
             </div>
@@ -68,12 +81,20 @@ const Form = props => {
           </GridContainer>
           <GridContainer columns={2}>
             <div className="button-form">
-              <Button label="Filtrar" btnStyle="primary" type="button" onClick={() => filterData( 
-                fieldMonth,
-                fieldYear,
-                setTypeOfErrorMessage,
-                setErrorMessage
-                )} />
+              <Button
+                label="Filtrar"
+                btnStyle="primary"
+                type="button"
+                onClick={() => {
+                  filterData(
+                    fieldMonth,
+                    getLabelYearFromArray(years, fieldYear),
+                    fieldDescription,
+                    setTypeOfErrorMessage,
+                    setErrorMessage,
+                  );
+                }}
+              />
             </div>
             <div className="button-form">
               <Button label="Limpar" btnStyle="success" type="button" />
