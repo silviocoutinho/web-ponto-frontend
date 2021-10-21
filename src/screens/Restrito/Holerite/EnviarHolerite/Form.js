@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Container } from 'react-bootstrap';
 
@@ -15,10 +15,12 @@ import RadioGroup from '../../../components/RadioGroup';
 import { IndexStyles } from '../../Styles';
 import { FormStyles } from './Styles';
 
-import { filterData } from './FilterData';
+import { checkData } from './CheckData';
+import { sendDataToAPI } from './DataToDatabase';
 import { months, years } from './DataToSelects';
+import { setMessage } from './MessageNotification';
 
-import { getLabelYearFromArray, getIndexMonthFromArray } from '../utils';
+import { getLabelYearFromArray } from '../utils';
 
 const Form = props => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -26,6 +28,12 @@ const Form = props => {
   const [fieldMonth, setFieldMonth] = useState(1);
   const [fieldYear, setFieldYear] = useState(1);
   const [fieldDescription, setFieldDescription] = useState('');
+
+  useEffect(() => {
+    if (errorMessage === 'Arquivo enviado!') {
+      clearForm();
+    }
+  }, [errorMessage]);
 
   const handleYear = evt => {
     setFieldYear(evt.target.value);
@@ -37,6 +45,49 @@ const Form = props => {
 
   const handleDescription = evt => {
     setFieldDescription(evt.target.value);
+  };
+
+  const clearForm = () => {
+    setFieldYear(1);
+    setFieldMonth(1);
+    setFieldDescription('');
+    document.querySelector('input[type="file"]').value = '';
+  };
+
+  const sendData = evt => {
+    const formData = new FormData();
+    const fileToUpload = document.querySelector('input[type="file"]').files[0];
+    formData.append('file', fileToUpload);
+
+    evt.preventDefault();
+
+    const isFormValid = checkData(
+      fieldMonth,
+      getLabelYearFromArray(years, fieldYear),
+      fieldDescription,
+      fileToUpload,
+    );
+
+    if (isFormValid.status === 'ERROR') {
+      setTypeOfErrorMessage('danger');
+      setErrorMessage(isFormValid.message);
+      return;
+    }
+
+    try {
+      sendDataToAPI(
+        fieldMonth,
+        getLabelYearFromArray(years, fieldYear),
+        fieldDescription,
+        fileToUpload,
+        setTypeOfErrorMessage,
+        setErrorMessage,
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    clearForm();
+    formData.delete('file');
   };
 
   return (
@@ -73,7 +124,6 @@ const Form = props => {
                 label="Referência"
                 onChange={handleDescription}
                 placeholder="Digite aqui a Referência do Holerite"
-                onChange={handleDescription}
                 value={fieldDescription}
               />
               <RadioGroup
@@ -95,18 +145,10 @@ const Form = props => {
           <GridContainer columns={2}>
             <div className="button-form">
               <Button
-                label="Filtrar"
+                label="Enviar"
                 btnStyle="primary"
                 type="button"
-                onClick={() => {
-                  filterData(
-                    fieldMonth,
-                    getLabelYearFromArray(years, fieldYear),
-                    fieldDescription,
-                    setTypeOfErrorMessage,
-                    setErrorMessage,
-                  );
-                }}
+                onClick={sendData}
               />
             </div>
             <div className="button-form">

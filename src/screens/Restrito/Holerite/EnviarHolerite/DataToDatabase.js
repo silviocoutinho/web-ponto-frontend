@@ -16,19 +16,20 @@ const baseURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUT
 
 axios.defaults.baseURL = baseURL;
 
-const getDataFromAPI = (
+const sendDataToAPI = (
   month,
   year,
   description,
+  fileToUpload,
   setTypeOfErrorMessage,
   setErrorMessage,
 ) => {
   const formData = new FormData();
   const token = localStorage.getItem('token');
 
-  const fileToUpload = document.querySelector('input[type="file"]').files[0];
+  //const fileToUpload = document.querySelector('input[type="file"]').files[0];
   month = month.toString().padStart(2, '0');
-  formData.append('file', fileToUpload);
+  //formData.append('file', fileToUpload);
 
   const resourceURL = `${baseURL}?month=${month}&year=${year}&description=${description}`;
   try {
@@ -93,4 +94,4 @@ const getDataFromAPI = (
   }
 };
 
-export { getDataFromAPI };
+export { sendDataToAPI };
