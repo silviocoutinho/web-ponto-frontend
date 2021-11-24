@@ -5,6 +5,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 import ActionCreator from '../../redux/actionCreators';
 import Header from './elements/Header';
 import Menu from './elements/Menu';
+import Avisos from './elements/Avisos';
 
 import { IndexStyles } from './Styles';
 
@@ -17,6 +18,7 @@ const Home = props => {
           <Col xs={3} md={2} className="menu-lateral">
             <Menu />
           </Col>
+          <Avisos show={true} />
         </Row>
       </Container>
     </IndexStyles>
