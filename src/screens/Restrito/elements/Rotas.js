@@ -12,6 +12,9 @@ import SolicitarHolerite from '../Holerite/SolicitarHolerite';
 //Dados dos usuarios
 import AlterarSenha from '../Usuarios/AlterarSenha';
 
+//Consulta Certificados
+import ConsultaCertificados from '../Cursos/ConsultaCertificados';
+
 import RotasAdm from './RotasAdm';
 
 const Rotas = props => {
@@ -43,7 +46,11 @@ const Rotas = props => {
           path={`${props.path}/alterar-senha`}
           component={AlterarSenha}
         />
-
+        <Route
+          exact
+          path={`${props.path}/consulta-certificados`}
+          component={ConsultaCertificados}
+        />
         <RotasAdm path={props.path} />
 
         <Route path="*" exact={true} component={PageNotFound} />
