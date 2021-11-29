@@ -4,12 +4,7 @@ import { Container } from 'react-bootstrap';
 
 import SelectDate from '../../../components/SelectDate';
 
-import {
-  Alert,
-  Button,
-  GridContainer,
-  DataTableCertificates,
-} from 'components-ui-cmjau';
+import { Alert, DataTableCertificates } from 'components-ui-cmjau';
 
 import { IndexStyles } from '../../Styles';
 import { FormStyles } from '../Styles';
