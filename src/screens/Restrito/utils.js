@@ -12,4 +12,12 @@ const getIndexMonthFromArray = (months, fieldMonth) => {
   return result[0].value;
 };
 
-export { getLabelYearFromArray, getIndexMonthFromArray };
+const getIndexYearFromArray = (years, selectedYear) => {
+  const result = years.filter(arrayOfYears => {
+    return arrayOfYears.label === selectedYear.toString();
+  });
+  console.log(Number(result[0].value));
+  return result[0].value;
+};
+
+export { getLabelYearFromArray, getIndexMonthFromArray, getIndexYearFromArray };
