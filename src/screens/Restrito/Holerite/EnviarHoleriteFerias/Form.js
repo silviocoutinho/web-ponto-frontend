@@ -10,7 +10,6 @@ import {
   Input,
 } from 'components-ui-cmjau';
 import FileUpload from '../../../components/FileUpload';
-import RadioGroup from '../../../components/RadioGroup';
 
 import { IndexStyles } from '../../Styles';
 import { FormStyles } from './Styles';
@@ -20,7 +19,7 @@ import { sendDataToAPI } from './DataToDatabase';
 import { months, years } from './DataToSelects';
 import { setMessage } from './MessageNotification';
 
-import { getLabelYearFromArray } from '../utils';
+import { getLabelYearFromArray } from '../../utils';
 
 const Form = props => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -92,11 +91,11 @@ const Form = props => {
         setTypeOfErrorMessage,
         setErrorMessage,
       );
+      clearForm();
+      formData.delete('file');
     } catch (error) {
       console.log(error);
     }
-    clearForm();
-    formData.delete('file');
   };
 
   return (
@@ -109,6 +108,7 @@ const Form = props => {
               <Select
                 data={months}
                 field="month"
+                id="selectMonth"
                 label="Mês"
                 onChange={handleMonth}
                 value={fieldMonth}
@@ -119,6 +119,7 @@ const Form = props => {
               <Select
                 data={years}
                 field="year"
+                id="selectYear"
                 label="Ano"
                 onChange={handleYear}
                 value={fieldYear}

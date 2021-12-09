@@ -11,14 +11,17 @@ import {
 } from 'components-ui-cmjau';
 
 import { IndexStyles } from '../../Styles';
-import { months, years, headTimeCard } from './Dados';
+import { months, years, headTimeCard } from './DataToSelects';
+import { getIndexYearFromArray } from '../../utils';
 
 const Formulario = props => {
   const [dataTimeCard, setDataTimeCard] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
-  const [fieldMonth, setFieldMonth] = useState(1);
-  const [fieldYear, setFieldYear] = useState(1);
+  const [fieldMonth, setFieldMonth] = useState(new Date().getMonth() + 1);
+  const [fieldYear, setFieldYear] = useState(
+    getIndexYearFromArray(years, new Date().getFullYear()),
+  );
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1;
 
@@ -126,16 +129,22 @@ const Formulario = props => {
             <Select
               data={months}
               field="month"
+              id="selectMonth"
               label="Mês"
               onChange={handleMonth}
+              value={fieldMonth}
+              selectedValue={fieldMonth}
             />
           </div>
           <div className="select-container">
             <Select
               data={years}
               field="year"
+              id="selectedYear"
               label="Ano"
               onChange={handleYear}
+              value={fieldYear}
+              selectedValue={fieldYear}
             />
           </div>
           <div className="button-container">

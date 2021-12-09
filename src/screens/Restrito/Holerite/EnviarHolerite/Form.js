@@ -20,7 +20,7 @@ import { sendDataToAPI } from './DataToDatabase';
 import { months, years } from './DataToSelects';
 import { setMessage } from './MessageNotification';
 
-import { getLabelYearFromArray } from '../utils';
+import { getLabelYearFromArray } from '../../utils';
 
 const Form = props => {
   const [errorMessage, setErrorMessage] = useState('');
