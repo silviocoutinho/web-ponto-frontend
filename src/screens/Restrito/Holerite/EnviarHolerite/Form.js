@@ -17,7 +17,7 @@ import { FormStyles } from './Styles';
 
 import { checkData } from './CheckData';
 import { sendDataToAPI } from './DataToDatabase';
-import { months, years } from './DataToSelects';
+import { months, years, typesPayslip } from './DataToSelects';
 import { setMessage } from './MessageNotification';
 
 import { getLabelYearFromArray } from '../../utils';
@@ -28,6 +28,7 @@ const Form = props => {
   const [fieldMonth, setFieldMonth] = useState(1);
   const [fieldYear, setFieldYear] = useState(1);
   const [fieldDescription, setFieldDescription] = useState('');
+  const [fieldTypePayslip, setFieldTypePayslip] = useState('');
 
   useEffect(() => {
     if (errorMessage === 'Arquivo enviado!') {
@@ -47,6 +48,9 @@ const Form = props => {
     setFieldDescription(evt.target.value);
   };
 
+  const handleTypePayslip = evt => {
+    setFieldTypePayslip(evt.target.value);
+  };
   const clearForm = () => {
     setFieldYear(1);
     setFieldMonth(1);
@@ -126,11 +130,16 @@ const Form = props => {
                 placeholder="Digite aqui a Referência do Holerite"
                 value={fieldDescription}
               />
-              <RadioGroup
-                label="Tipo de envio"
-                field="radio-tipo-envio"
-                onChange=""
-                name="tipoEnvio"
+            </div>
+            <div className="select-container">
+              <Select
+                data={typesPayslip}
+                field="typePayslip"
+                label="Tipo de Holerite"
+                id="selectTypePaySlip"
+                onChange={handleTypePayslip}
+                value={fieldTypePayslip}
+                selectedValue={fieldTypePayslip}
               />
             </div>
           </GridContainer>

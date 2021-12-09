@@ -60,4 +60,11 @@ const years = [
   },
 ];
 
-export { months, years };
+const typesPayslip = [
+  {
+    label: 'Mensal',
+    value: 1,
+  },
+];
+
+export { months, years, typesPayslip };
