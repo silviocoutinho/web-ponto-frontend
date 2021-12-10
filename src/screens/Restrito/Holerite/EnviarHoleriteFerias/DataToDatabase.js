@@ -7,48 +7,69 @@ const {
   REACT_APP_VERSION_API,
   REACT_APP_ENV,
 } = process.env;
-
-const RESOURCE = 'upload/pdf';
+// payslip/upload/vacation/pdf
+const RESOURCE = 'upload/vacation/pdf';
 const MAIN_ROUTE = `${REACT_APP_VERSION_API}/payslip/${RESOURCE}`;
 const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
 
-let apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
+const baseURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
 
-axios.defaults.baseURL = apiURL;
+axios.defaults.baseURL = baseURL;
 
-const getDataFromAPI = (
+const sendDataToAPI = (
   month,
   year,
+  description,
+  employeeRegistration,
+  fileToUpload,
+  typePayslip,
   setTypeOfErrorMessage,
   setErrorMessage,
 ) => {
   const formData = new FormData();
   const token = localStorage.getItem('token');
-  const description = '10/2021';
-  apiURL = `${apiURL}?month=10&year=2021&description=09/2021`;  
+
+  month = month.toString().padStart(2, '0');
+  formData.append('file', fileToUpload);
+
+  const resourceURL = `${baseURL}?month=${month}&year=${year}&description=${description}&typePayslip=${typePayslip}&employeeRegistration=${employeeRegistration}`;
   try {
-    console.log(apiURL);
-    axios.post(apiURL, formData ,{ 
-      headers: {
-      'Content-Type': 'multipart/form-data',
-      Authorization: 'Bearer ' + token
-     }})
+    axios
+      .post(resourceURL, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: 'Bearer ' + token,
+        },
+      })
       .then(res => {
+        if (res.status === 200) {
+          setMessage(
+            setTypeOfErrorMessage,
+            setErrorMessage,
+            'success',
+            'Dados enviados com sucesso!!!',
+          );
+          return;
+        }
         if (res.data.length === 0) {
           //TODO: Revisar Mensagens de Alerta!!!
           setMessage(
             setTypeOfErrorMessage,
             setErrorMessage,
             'warning',
-            'PERSONALIZAR!',
+            'Erro de serviço. Informar o TI!',
           );
           return;
         }
-        setMessage(setTypeOfErrorMessage, setErrorMessage, 'warning', null);
+        setMessage(
+          setTypeOfErrorMessage,
+          setErrorMessage,
+          'success',
+          res.data.message,
+        );
       })
       .catch(err => {
         if (!err.response) {
-          //TODO: Revisar Mensagens de Alerta!!!
           setMessage(
             setTypeOfErrorMessage,
             setErrorMessage,
@@ -64,10 +85,18 @@ const getDataFromAPI = (
             'danger',
             `${response}.`,
           );
+        } else if (err.response.status === 500) {
+          const code = err.response.status;
+          const response = err.response.data.error;
+          setMessage(
+            setTypeOfErrorMessage,
+            setErrorMessage,
+            'danger',
+            `${response}.`,
+          );
         } else {
           const code = err.response.status;
           const response = err.response.data;
-          //TODO: Revisar Mensagens de Alerta!!!
           setMessage(
             setTypeOfErrorMessage,
             setErrorMessage,
@@ -81,4 +110,4 @@ const getDataFromAPI = (
   }
 };
 
-export { getDataFromAPI };
+export { sendDataToAPI };

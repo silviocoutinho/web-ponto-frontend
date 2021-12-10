@@ -36,17 +36,27 @@ class Login extends Component {
     const { email, passwd } = this.state.form;
     this.props.login(email, passwd);
   };
+  clearSession = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
   validateToken = () => {
     this.props.validateToken();
   };
 
   render() {
-    console.log('Auth:', this.props.auth);
-    if (!this.props.auth.isTokenValid && !this.props.auth.isValidingToken) {
-      this.validateToken();
-    }
-    if (this.props.auth.isAuth) {
+    //console.log('Auth:', this.props.auth);
+
+    if (this.props.auth.isAuth && this.props.auth.isTokenValid) {
       return <Redirect to="/restrito" />;
+    }
+
+    if (
+      !this.props.auth.isTokenValid &&
+      !this.props.auth.isValidingToken &&      
+      this.props.auth.isAuth
+    ) {
+      this.validateToken();
     }
 
     return (
@@ -83,9 +93,16 @@ class Login extends Component {
                       onChange={this.handleChange('passwd')}
                     />
                   </Form.Group>
-                  <Button variant="primary" onClick={this.login}>
-                    Logar
-                  </Button>
+                  <Form.Group>
+                    <Button variant="primary" onClick={this.login}>
+                      Logar
+                    </Button>
+                  </Form.Group>
+                  <Form.Group>
+                    <Button variant="primary" onClick={this.clearSession}>
+                      Limpar Sessão
+                    </Button>                  
+                  </Form.Group>        
                 </Form>
               </Jumbotron>
             </Col>

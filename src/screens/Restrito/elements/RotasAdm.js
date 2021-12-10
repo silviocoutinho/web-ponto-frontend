@@ -1,23 +1,30 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import PageNotFound from '../elements/404';
 
 //Exibição de dados do Holerite
 import EnviarHolerite from '../Holerite/EnviarHolerite';
+import EnviarHoleriteFerias from '../Holerite/EnviarHoleriteFerias';
 
-const Rotas = props => {
+const RotasAdm = props => {
   return (
     <>
-      <Route
-        exact
-        path={`${props.path}/upload-payslip`}
-        component={EnviarHolerite}
-      />
-
-      <Route path="*" exact={true} component={PageNotFound} />
+      <Switch>
+        <Route
+          exact
+          path={`${props.path}/upload-payslip`}
+          component={EnviarHolerite}
+        />
+        <Route
+          exact
+          path={`${props.path}/upload-vacation-payslip`}
+          component={EnviarHoleriteFerias}
+        />
+        <Route path="*" exact={true} component={PageNotFound} />
+      </Switch>
     </>
   );
 };
 
-export default Rotas;
+export default RotasAdm;

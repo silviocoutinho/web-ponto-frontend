@@ -48,8 +48,11 @@ export function* login(action) {
 }
 
 export function* validateToken() {
-  const { REACT_APP_PORT_API, REACT_APP_URL } = process.env;
-  const url = `${REACT_APP_URL}:${REACT_APP_PORT_API}`;
+  const { REACT_APP_PORT_API, REACT_APP_URL, REACT_APP_ENV } = process.env;
+
+  const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
+  const url = `${envURL}${REACT_APP_URL}:${REACT_APP_PORT_API}`;
+  axios.defaults.baseURL = url;
 
   let token = localStorage.getItem('token');
 

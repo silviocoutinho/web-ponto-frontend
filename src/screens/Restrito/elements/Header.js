@@ -41,17 +41,24 @@ const Header = props => {
                   as={Link}
                   to="/restrito/upload-payslip"
                 >
-                  Enviar por Lote
+                  Enviar Mensal por Lote
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   eventKey="2"
+                  as={Link}
+                  to="/restrito/upload-vacation-payslip"
+                >
+                  Enviar único de Férias
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  eventKey="3"
                   as={Link}
                   to="/restrito/change-payslip"
                 >
                   Substituir um Holerite
                 </NavDropdown.Item>
                 <NavDropdown.Item
-                  eventKey="3"
+                  eventKey="4"
                   as={Link}
                   to="/restrito/remove-payslip"
                 >
@@ -59,7 +66,7 @@ const Header = props => {
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item
-                  eventKey="4"
+                  eventKey="5"
                   as={Link}
                   to="/restrito/send-message"
                 >

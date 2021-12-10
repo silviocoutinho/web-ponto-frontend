@@ -11,14 +11,18 @@ import {
 } from 'components-ui-cmjau';
 
 import { IndexStyles } from '../../Styles';
-import { months, years, headTimeCard } from './Dados';
+import { months, years, headTimeCard } from './DataToSelects';
+import { getIndexYearFromArray } from '../../utils';
+import { getLabelYearFromArray } from '../../utils';
 
 const Formulario = props => {
   const [dataTimeCard, setDataTimeCard] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
-  const [fieldMonth, setFieldMonth] = useState(1);
-  const [fieldYear, setFieldYear] = useState(1);
+  const [fieldMonth, setFieldMonth] = useState(new Date().getMonth() + 1);
+  const [fieldYear, setFieldYear] = useState(
+    getIndexYearFromArray(years, new Date().getFullYear()),
+  );
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1;
 
@@ -99,12 +103,20 @@ const Formulario = props => {
   };
 
   const filterData = () => {
-    const selectedYears = years
+    /* const selectedYears = years
       .filter(element => Number(element.value) === Number(fieldYear))
-      .map(element => element.label);
+      .map(element => element.label); */
 
+    const yearToFilter = getLabelYearFromArray(years, fieldYear);
+    //console.log('selectedYear', yearToFilter);
+    /* console.log(
+      currentYear < Number(yearToFilter),
+      currentYear,
+      yearToFilter,
+      currentYear === Number(yearToFilter),
+    ); */
     if (
-      currentYear === Number(selectedYears) &&
+      currentYear === Number(yearToFilter) &&
       Number(fieldMonth) > currentMonth
     ) {
       setDataTimeCard(null);
@@ -112,8 +124,14 @@ const Formulario = props => {
       setErrorMessage(
         'Mês selecionado inválido. Selecione um mês igual ou inferior ao atual!',
       );
+    } else if (currentYear < Number(yearToFilter)) {
+      setDataTimeCard(null);
+      setTypeOfErrorMessage('danger');
+      setErrorMessage(
+        'Ano selecionado inválido. Selecione um ano igual ou inferior ao atual!',
+      );
     } else {
-      getDataFromAPI(Number(fieldMonth), selectedYears);
+      getDataFromAPI(Number(fieldMonth), yearToFilter);
     }
   };
 
@@ -126,16 +144,22 @@ const Formulario = props => {
             <Select
               data={months}
               field="month"
+              id="selectMonth"
               label="Mês"
               onChange={handleMonth}
+              value={fieldMonth}
+              selectedValue={fieldMonth}
             />
           </div>
           <div className="select-container">
             <Select
               data={years}
               field="year"
+              id="selectedYear"
               label="Ano"
               onChange={handleYear}
+              value={fieldYear}
+              selectedValue={fieldYear}
             />
           </div>
           <div className="button-container">

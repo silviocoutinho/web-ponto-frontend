@@ -7,6 +7,7 @@ import { BsGridFill as BsGrid } from 'react-icons/bs';
 import { BsFillCalendarFill } from 'react-icons/bs';
 import { BsFillArchiveFill } from 'react-icons/bs';
 import { BsFillGridFill } from 'react-icons/bs';
+import { Certificate } from 'grommet-icons';
 
 const Menu = () => {
   const [openPontos, setOpenPontos] = useState(true);
@@ -32,7 +33,7 @@ const Menu = () => {
       <Collapse in={openPontos} appear={false}>
         <ul>
           <li>
-            <Link to={'/restrito/consulta-mensal'}>Relatório por Mês</Link>
+            <Link to={'/restrito/consulta-mensal'}>Consulta por Mês</Link>
           </li>
           <li>
             <Link to={'/restrito/consulta-dia'}>Consulta por dia</Link>
@@ -58,6 +59,17 @@ const Menu = () => {
           </li>
         </ul>
       </Collapse>
+      <Button
+        variant="secondary"
+        className="menu-lateral-button"
+        onClick={() => setOpenHolerite(!openHolerite)}
+        aria-expanded={openHolerite}
+      >
+        <Certificate color="#c2c7d0" className="menu-lateral-button-icone" />
+        <Link to={'/restrito/consulta-certificados'}>
+          Certificados de Cursos
+        </Link>
+      </Button>
     </div>
   );
 };
