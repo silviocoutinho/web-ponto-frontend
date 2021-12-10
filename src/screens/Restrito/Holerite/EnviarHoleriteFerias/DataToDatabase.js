@@ -7,8 +7,8 @@ const {
   REACT_APP_VERSION_API,
   REACT_APP_ENV,
 } = process.env;
-
-const RESOURCE = 'upload/pdf';
+// payslip/upload/vacation/pdf
+const RESOURCE = 'upload/vacation/pdf';
 const MAIN_ROUTE = `${REACT_APP_VERSION_API}/payslip/${RESOURCE}`;
 const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
 
@@ -20,6 +20,7 @@ const sendDataToAPI = (
   month,
   year,
   description,
+  employeeRegistration,
   fileToUpload,
   typePayslip,
   setTypeOfErrorMessage,
@@ -28,11 +29,10 @@ const sendDataToAPI = (
   const formData = new FormData();
   const token = localStorage.getItem('token');
 
-  //const fileToUpload = document.querySelector('input[type="file"]').files[0];
   month = month.toString().padStart(2, '0');
   formData.append('file', fileToUpload);
 
-  const resourceURL = `${baseURL}?month=${month}&year=${year}&description=${description}&typePayslip=${typePayslip}`;
+  const resourceURL = `${baseURL}?month=${month}&year=${year}&description=${description}&typePayslip=${typePayslip}&employeeRegistration=${employeeRegistration}`;
   try {
     axios
       .post(resourceURL, formData, {
@@ -70,7 +70,6 @@ const sendDataToAPI = (
       })
       .catch(err => {
         if (!err.response) {
-          //TODO: Revisar Mensagens de Alerta!!!
           setMessage(
             setTypeOfErrorMessage,
             setErrorMessage,
@@ -86,10 +85,18 @@ const sendDataToAPI = (
             'danger',
             `${response}.`,
           );
+        } else if (err.response.status === 500) {
+          const code = err.response.status;
+          const response = err.response.data.error;
+          setMessage(
+            setTypeOfErrorMessage,
+            setErrorMessage,
+            'danger',
+            `${response}.`,
+          );
         } else {
           const code = err.response.status;
           const response = err.response.data;
-          //TODO: Revisar Mensagens de Alerta!!!
           setMessage(
             setTypeOfErrorMessage,
             setErrorMessage,
