@@ -123,7 +123,7 @@ const Form = props => {
                 label="Ano"
                 onChange={handleYear}
                 value={fieldYear}
-                selectedValue={fieldMonth}
+                selectedValue={fieldYear}
               />
             </div>
           </GridContainer>

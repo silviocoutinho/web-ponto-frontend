@@ -51,12 +51,16 @@ const months = [
 
 const years = [
   {
-    label: '2020',
+    label: '2022',
     value: '1',
   },
   {
     label: '2021',
     value: '2',
+  },
+  {
+    label: '2020',
+    value: '3',
   },
 ];
 
@@ -64,6 +68,10 @@ const typesPayslip = [
   {
     label: 'Mensal',
     value: 1,
+  },
+  {
+    label: '13º Salário',
+    value: 2,
   },
 ];
 

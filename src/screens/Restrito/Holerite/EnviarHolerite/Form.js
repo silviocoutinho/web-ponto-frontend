@@ -10,7 +10,6 @@ import {
   Input,
 } from 'components-ui-cmjau';
 import FileUpload from '../../../components/FileUpload';
-import RadioGroup from '../../../components/RadioGroup';
 
 import { IndexStyles } from '../../Styles';
 import { FormStyles } from './Styles';
@@ -87,11 +86,11 @@ const Form = props => {
         setTypeOfErrorMessage,
         setErrorMessage,
       );
+      clearForm();
+      formData.delete('file');
     } catch (error) {
       console.log(error);
     }
-    clearForm();
-    formData.delete('file');
   };
 
   return (
