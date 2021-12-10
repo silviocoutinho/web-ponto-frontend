@@ -27,7 +27,7 @@ const Form = props => {
   const [fieldMonth, setFieldMonth] = useState(1);
   const [fieldYear, setFieldYear] = useState(1);
   const [fieldDescription, setFieldDescription] = useState('');
-  const [fieldTypePayslip, setFieldTypePayslip] = useState('');
+  const [fieldTypePayslip, setFieldTypePayslip] = useState('1');
 
   useEffect(() => {
     if (errorMessage === 'Arquivo enviado!') {
@@ -83,6 +83,7 @@ const Form = props => {
         getLabelYearFromArray(years, fieldYear),
         fieldDescription,
         fileToUpload,
+        fieldTypePayslip,
         setTypeOfErrorMessage,
         setErrorMessage,
       );

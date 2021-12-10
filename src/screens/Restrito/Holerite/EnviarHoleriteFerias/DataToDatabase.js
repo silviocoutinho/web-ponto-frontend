@@ -34,7 +34,6 @@ const sendDataToAPI = (
 
   const resourceURL = `${baseURL}?month=${month}&year=${year}&description=${description}&typePayslip=${typePayslip}&employeeRegistration=${employeeRegistration}`;
   try {
-    console.log(resourceURL);
     axios
       .post(resourceURL, formData, {
         headers: {
@@ -43,6 +42,15 @@ const sendDataToAPI = (
         },
       })
       .then(res => {
+        if (res.status === 200) {
+          setMessage(
+            setTypeOfErrorMessage,
+            setErrorMessage,
+            'success',
+            'Dados enviados com sucesso!!!',
+          );
+          return;
+        }
         if (res.data.length === 0) {
           //TODO: Revisar Mensagens de Alerta!!!
           setMessage(

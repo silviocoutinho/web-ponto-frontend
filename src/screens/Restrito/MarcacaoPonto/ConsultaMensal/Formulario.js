@@ -13,6 +13,7 @@ import {
 import { IndexStyles } from '../../Styles';
 import { months, years, headTimeCard } from './DataToSelects';
 import { getIndexYearFromArray } from '../../utils';
+import { getLabelYearFromArray } from '../../utils';
 
 const Formulario = props => {
   const [dataTimeCard, setDataTimeCard] = useState(null);
@@ -102,12 +103,20 @@ const Formulario = props => {
   };
 
   const filterData = () => {
-    const selectedYears = years
+    /* const selectedYears = years
       .filter(element => Number(element.value) === Number(fieldYear))
-      .map(element => element.label);
+      .map(element => element.label); */
 
+    const yearToFilter = getLabelYearFromArray(years, fieldYear);
+    //console.log('selectedYear', yearToFilter);
+    /* console.log(
+      currentYear < Number(yearToFilter),
+      currentYear,
+      yearToFilter,
+      currentYear === Number(yearToFilter),
+    ); */
     if (
-      currentYear === Number(selectedYears) &&
+      currentYear === Number(yearToFilter) &&
       Number(fieldMonth) > currentMonth
     ) {
       setDataTimeCard(null);
@@ -115,8 +124,14 @@ const Formulario = props => {
       setErrorMessage(
         'Mês selecionado inválido. Selecione um mês igual ou inferior ao atual!',
       );
+    } else if (currentYear < Number(yearToFilter)) {
+      setDataTimeCard(null);
+      setTypeOfErrorMessage('danger');
+      setErrorMessage(
+        'Ano selecionado inválido. Selecione um ano igual ou inferior ao atual!',
+      );
     } else {
-      getDataFromAPI(Number(fieldMonth), selectedYears);
+      getDataFromAPI(Number(fieldMonth), yearToFilter);
     }
   };
 

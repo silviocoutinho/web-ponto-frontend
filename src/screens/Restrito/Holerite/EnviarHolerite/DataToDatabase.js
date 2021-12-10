@@ -21,6 +21,7 @@ const sendDataToAPI = (
   year,
   description,
   fileToUpload,
+  typePayslip,
   setTypeOfErrorMessage,
   setErrorMessage,
 ) => {
@@ -29,11 +30,10 @@ const sendDataToAPI = (
 
   //const fileToUpload = document.querySelector('input[type="file"]').files[0];
   month = month.toString().padStart(2, '0');
-  //formData.append('file', fileToUpload);
+  formData.append('file', fileToUpload);
 
-  const resourceURL = `${baseURL}?month=${month}&year=${year}&description=${description}`;
+  const resourceURL = `${baseURL}?month=${month}&year=${year}&description=${description}&typePayslip=${typePayslip}`;
   try {
-    console.log(resourceURL);
     axios
       .post(resourceURL, formData, {
         headers: {
@@ -42,6 +42,15 @@ const sendDataToAPI = (
         },
       })
       .then(res => {
+        if (res.status === 200) {
+          setMessage(
+            setTypeOfErrorMessage,
+            setErrorMessage,
+            'success',
+            'Dados enviados com sucesso!!!',
+          );
+          return;
+        }
         if (res.data.length === 0) {
           //TODO: Revisar Mensagens de Alerta!!!
           setMessage(
