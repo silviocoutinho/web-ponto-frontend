@@ -21,7 +21,7 @@ const {
 } = process.env;
 
 const RESOURCE = 'certificados';
-const MAIN_ROUTE = `${REACT_APP_VERSION_API}/${RESOURCE}/${null}/aguardando`;
+const MAIN_ROUTE = `${REACT_APP_VERSION_API}/${RESOURCE}/aguardando`;
 const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
 
 const apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;

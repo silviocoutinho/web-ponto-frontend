@@ -79,7 +79,8 @@ const headTimeCard = {
   sai1: 'Saída 1',
   sai2: 'Saída 2',
   sai3: 'Saída 3',
-  total: 'Total',
+  total: 'Trabalhadas',
+  faltam: 'Faltam',
 };
 
 export { months, years, headTimeCard };
