@@ -51,6 +51,13 @@ const Header = props => {
                   Enviar único de Férias
                 </NavDropdown.Item>
                 <NavDropdown.Item
+                  eventKey="2"
+                  as={Link}
+                  to="/restrito/upload-others-payslip"
+                >
+                  Enviar único de Licença Prêmio
+                </NavDropdown.Item>
+                <NavDropdown.Item
                   eventKey="3"
                   as={Link}
                   to="/restrito/change-payslip"
