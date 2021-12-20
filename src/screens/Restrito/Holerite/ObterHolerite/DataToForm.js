@@ -11,6 +11,10 @@ const years = [
     label: '2021',
     value: '3',
   },
+  {
+    label: '2022',
+    value: '4',
+  },
 ];
 
 export { years };
