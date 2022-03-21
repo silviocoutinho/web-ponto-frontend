@@ -4,10 +4,15 @@ import jwtDecode from 'jwt-decode';
 import ActionCreators from '../actionCreators';
 
 export function* login(action) {
-  const { REACT_APP_PORT_API, REACT_APP_URL, REACT_APP_ENV } = process.env;
+  const {
+    REACT_APP_PORT_API,
+    REACT_APP_URL,
+    REACT_APP_ENV,
+    REACT_APP_URL_API,
+  } = process.env;
 
   const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
-  const url = `${envURL}${REACT_APP_URL}:${REACT_APP_PORT_API}`;
+  const url = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}`;
   axios.defaults.baseURL = url;
 
   let token = localStorage.getItem('token');
@@ -48,10 +53,15 @@ export function* login(action) {
 }
 
 export function* validateToken() {
-  const { REACT_APP_PORT_API, REACT_APP_URL, REACT_APP_ENV } = process.env;
+  const {
+    REACT_APP_PORT_API,
+    REACT_APP_URL,
+    REACT_APP_ENV,
+    REACT_APP_URL_API,
+  } = process.env;
 
   const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
-  const url = `${envURL}${REACT_APP_URL}:${REACT_APP_PORT_API}`;
+  const url = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}`;
   axios.defaults.baseURL = url;
 
   let token = localStorage.getItem('token');

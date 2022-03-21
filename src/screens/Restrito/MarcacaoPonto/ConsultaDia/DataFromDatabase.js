@@ -54,6 +54,7 @@ const getDataFromAPI = (
         setMessage(setTypeOfErrorMessage, setErrorMessage, 'warning', null);
       })
       .catch(err => {
+        console.log('getDataFromAPi', err);
         setDataTimeCard(null);
         if (!err.response) {
           setMessage(
