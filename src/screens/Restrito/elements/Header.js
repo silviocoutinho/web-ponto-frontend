@@ -14,9 +14,11 @@ const Header = props => {
     <HeaderStyles>
       <header>
         <Navbar expand="sm md lg">
-          <Navbar.Brand href="/restrito">
-            <Image src={logo} className="navbar-logo" rounded />
-            {props.title}
+          <Navbar.Brand href="/restrito" className="header-title">
+            <Link to={'/restrito'} className="header-title">
+              <Image src={logo} className="navbar-logo" rounded />
+              <span>{props.title}</span>
+            </Link>
           </Navbar.Brand>
           <button
             className="navbar-toggler"
@@ -87,7 +89,7 @@ const Header = props => {
               className="menu-usuario"
             >
               <NavDropdown.Item eventKey="5" href="restrito/minha-conta">
-                Minha Conta
+                <Link to={'/restrito/minha-conta'}>Minha Conta</Link>
               </NavDropdown.Item>
               <NavDropdown.Item eventKey="6" href="restrito/alterar-senha">
                 <Link to={'/restrito/alterar-senha'}>Alterar Senha</Link>
