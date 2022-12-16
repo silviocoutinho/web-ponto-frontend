@@ -33,14 +33,14 @@ const Form = props => {
   const [fieldYear, setFieldYear] = useState(1);
   const currentYear = new Date().getFullYear();
 
+  
   useEffect(() => {
     setFieldYear(() => {
       const yearToCombobox = years.filter(arrayOfYears => {
         return arrayOfYears.label === currentYear.toString();
       });
       return yearToCombobox[0].value;
-    });
-    setFieldYear(3);
+    });    
   }, []);
 
   const handleYear = evt => {
