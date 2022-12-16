@@ -8,6 +8,7 @@ const filterData = (
   setErrorMessage,
   setDataTimeCard,
 ) => {
+  console.log('OK');
   if (starDate > endDate) {
     setMessage(
       setTypeOfErrorMessage,
