@@ -16,7 +16,7 @@ import { FormStyles } from './Styles';
 
 import { checkData } from './CheckData';
 import { sendDataToAPI } from './DataToDatabase';
-import { months, typesPayslip } from './DataToSelects';
+import { months } from './DataToSelects';
 import { yearsFromDatabase } from '../yearsFromDatabase';
 
 import { getLabelYearFromArray } from '../../utils';
@@ -27,7 +27,8 @@ const Form = props => {
   const [fieldMonth, setFieldMonth] = useState(1);
   const [fieldYear, setFieldYear] = useState(1);
   const [fieldDescription, setFieldDescription] = useState('');
-  const [fieldTypePayslip, setFieldTypePayslip] = useState('1');
+  const [fieldEmployeeRegistration, setFieldEmployeeRegistration] =
+    useState('');
   const [years, setYears] = useState([]);
 
   useEffect(() => {
@@ -52,13 +53,14 @@ const Form = props => {
     setFieldDescription(evt.target.value);
   };
 
-  const handleTypePayslip = evt => {
-    setFieldTypePayslip(evt.target.value);
+  const handleEmployeeRegistration = evt => {
+    setFieldEmployeeRegistration(evt.target.value);
   };
   const clearForm = () => {
     setFieldYear(1);
     setFieldMonth(1);
     setFieldDescription('');
+    setFieldEmployeeRegistration('');
     document.querySelector('input[type="file"]').value = '';
   };
 
@@ -73,6 +75,7 @@ const Form = props => {
       fieldMonth,
       getLabelYearFromArray(years, fieldYear),
       fieldDescription,
+      fieldEmployeeRegistration,
       fileToUpload,
     );
 
@@ -87,8 +90,9 @@ const Form = props => {
         fieldMonth,
         getLabelYearFromArray(years, fieldYear),
         fieldDescription,
+        fieldEmployeeRegistration,
         fileToUpload,
-        fieldTypePayslip,
+        4, //Licenca Premio
         setTypeOfErrorMessage,
         setErrorMessage,
       );
@@ -102,13 +106,15 @@ const Form = props => {
   return (
     <IndexStyles>
       <FormStyles>
-        <h1>Enviar Holerites em Lote </h1>
+        <h1>{props.title}</h1>
+        <h2>{}</h2>
         <Container className="meio">
           <GridContainer columns={2}>
             <div className="select-container">
               <Select
                 data={months}
                 field="month"
+                id="selectMonth"
                 label="Mês"
                 onChange={handleMonth}
                 value={fieldMonth}
@@ -119,10 +125,11 @@ const Form = props => {
               <Select
                 data={years}
                 field="year"
+                id="selectYear"
                 label="Ano"
                 onChange={handleYear}
                 value={fieldYear}
-                selectedValue={fieldMonth}
+                selectedValue={fieldYear}
               />
             </div>
           </GridContainer>
@@ -137,23 +144,18 @@ const Form = props => {
               />
             </div>
             <div className="select-container">
-              <Select
-                data={typesPayslip}
-                field="typePayslip"
-                label="Tipo de Holerite"
-                id="selectTypePaySlip"
-                onChange={handleTypePayslip}
-                value={fieldTypePayslip}
-                selectedValue={fieldTypePayslip}
+              <Input
+                field="employeeRegistration"
+                label="Matrícula"
+                onChange={handleEmployeeRegistration}
+                placeholder="Digite aqui a Matrícula do Funcionário"
+                value={fieldEmployeeRegistration}
               />
             </div>
           </GridContainer>
           <GridContainer columns={1}>
             <div className="select-container">
-              <FileUpload
-                label="Selecionar Lote de Holerites"
-                field="fileHolerites"
-              />
+              <FileUpload label={props.titleUploadFile} field="fileHolerites" />
             </div>
           </GridContainer>
           <GridContainer columns={2}>
