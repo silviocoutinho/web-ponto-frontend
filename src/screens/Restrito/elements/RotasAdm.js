@@ -8,6 +8,7 @@ import EnviarHolerite from '../Holerite/EnviarHolerite';
 import EnviarHoleriteFerias from '../Holerite/EnviarHoleriteFerias';
 import EnviarHoleriteLicencaPremio from '../Holerite/EnviarHoleriteLicencaPremio'; //
 import GerenciarCertificados from '../Cursos/GerenciamentoDeCertificados';
+import EnviarHoleriteAdiantamento13 from '../Holerite/EnviarHoleriteAdiantamento13';
 
 const RotasAdm = props => {
   return (
@@ -27,6 +28,11 @@ const RotasAdm = props => {
           exact
           path={`${props.path}/upload-others-payslip`}
           component={EnviarHoleriteLicencaPremio}
+        />
+        <Route
+          exact
+          path={`${props.path}/upload-13-payslip`}
+          component={EnviarHoleriteAdiantamento13}
         />
         <Route
           exact
