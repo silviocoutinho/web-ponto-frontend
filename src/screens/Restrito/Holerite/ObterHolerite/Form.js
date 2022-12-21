@@ -14,7 +14,7 @@ import { IndexStyles } from '../../Styles';
 import { FormStyles } from '../Styles';
 
 import { HeaderPayslip } from './HeaderPayslip';
-import { years } from './DataToForm';
+import { yearsFromDatabase } from '../yearsFromDatabase';
 import { filterData } from './FilterData';
 
 const { REACT_APP_FILE_SERVER, REACT_APP_PATH_FILES_STORED, REACT_APP_ENV } =
@@ -25,22 +25,25 @@ const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
 const fileServerURL = `${envURL}${REACT_APP_FILE_SERVER}/${REACT_APP_PATH_FILES_STORED}`;
 
 const Form = props => {
-
   const [dataPayslip, setDataPayslip] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
 
   const [fieldYear, setFieldYear] = useState(1);
   const currentYear = new Date().getFullYear();
+  const [years, setYears] = useState([]);
 
-  
+  useEffect(() => {
+    yearsFromDatabase(setYears);
+  }, []);
+
   useEffect(() => {
     setFieldYear(() => {
       const yearToCombobox = years.filter(arrayOfYears => {
         return arrayOfYears.label === currentYear.toString();
       });
       return yearToCombobox[0].value;
-    });    
+    });
   }, []);
 
   const handleYear = evt => {
@@ -85,9 +88,7 @@ const Form = props => {
                 }
               />
             </div>
-            <div className="button-form">
-              
-            </div>
+            <div className="button-form"></div>
           </GridContainer>
           {dataPayslip && (
             <PayslipTable

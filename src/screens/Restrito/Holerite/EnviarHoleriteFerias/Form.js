@@ -16,8 +16,8 @@ import { FormStyles } from './Styles';
 
 import { checkData } from './CheckData';
 import { sendDataToAPI } from './DataToDatabase';
-import { months, years } from './DataToSelects';
-import { setMessage } from './MessageNotification';
+import { months } from './DataToSelects';
+import { yearsFromDatabase } from '../yearsFromDatabase';
 
 import { getLabelYearFromArray } from '../../utils';
 
@@ -29,6 +29,11 @@ const Form = props => {
   const [fieldDescription, setFieldDescription] = useState('');
   const [fieldEmployeeRegistration, setFieldEmployeeRegistration] =
     useState('');
+  const [years, setYears] = useState([]);
+
+  useEffect(() => {
+    yearsFromDatabase(setYears);
+  }, []);
 
   useEffect(() => {
     if (errorMessage === 'Arquivo enviado!') {
