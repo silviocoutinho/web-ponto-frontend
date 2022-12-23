@@ -14,9 +14,11 @@ const Header = props => {
     <HeaderStyles>
       <header>
         <Navbar expand="sm md lg">
-          <Navbar.Brand href="/restrito">
-            <Image src={logo} className="navbar-logo" rounded />
-            {props.title}
+          <Navbar.Brand href="/restrito" className="header-title">
+            <Link to={'/restrito'} className="header-title">
+              <Image src={logo} className="navbar-logo" rounded />
+              <span>{props.title}</span>
+            </Link>
           </Navbar.Brand>
           <button
             className="navbar-toggler"
@@ -60,12 +62,19 @@ const Header = props => {
                 <NavDropdown.Item
                   eventKey="3"
                   as={Link}
+                  to="/restrito/upload-13-payslip"
+                >
+                  Enviar Adiantamento 13 Salário
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  eventKey="4"
+                  as={Link}
                   to="/restrito/change-payslip"
                 >
                   Substituir um Holerite
                 </NavDropdown.Item>
                 <NavDropdown.Item
-                  eventKey="4"
+                  eventKey="5"
                   as={Link}
                   to="/restrito/remove-payslip"
                 >
@@ -73,7 +82,7 @@ const Header = props => {
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item
-                  eventKey="5"
+                  eventKey="6"
                   as={Link}
                   to="/restrito/send-message"
                 >
@@ -86,14 +95,14 @@ const Header = props => {
               id="basic-nav-dropdown"
               className="menu-usuario"
             >
-              <NavDropdown.Item eventKey="5" href="restrito/minha-conta">
-                Minha Conta
+              <NavDropdown.Item eventKey="7" href="restrito/minha-conta">
+                <Link to={'/restrito/minha-conta'}>Minha Conta</Link>
               </NavDropdown.Item>
-              <NavDropdown.Item eventKey="6" href="restrito/alterar-senha">
+              <NavDropdown.Item eventKey="8" href="restrito/alterar-senha">
                 <Link to={'/restrito/alterar-senha'}>Alterar Senha</Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item eventKey="7" onClick={props.logout}>
+              <NavDropdown.Item eventKey="9" onClick={props.logout}>
                 Sair
               </NavDropdown.Item>
             </NavDropdown>

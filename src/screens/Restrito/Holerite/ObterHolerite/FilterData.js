@@ -9,8 +9,7 @@ const filterData = (
 ) => {
   const yearToGetData = years.filter(arrayOfYears => {
     return arrayOfYears.value === fieldYear.toString();
-  });
-  console.log(yearToGetData[0].label);
+  });  
   getDataFromAPI(
     yearToGetData[0].label,
     setTypeOfErrorMessage,

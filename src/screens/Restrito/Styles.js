@@ -12,6 +12,14 @@ export const IndexStyles = styled.div`
     text-align: center;
   }
 
+  .header-title {
+    /* unvisited link */
+    a {
+      decoration: none;
+      color: white;
+    }
+  }
+
   .meio {
     padding: 25px 0;
     background: #fff;
