@@ -14,7 +14,7 @@ import { IndexStyles } from '../../Styles';
 import { FormStyles } from '../Styles';
 
 import { HeaderPayslip } from './HeaderPayslip';
-import { yearsFromDatabase } from '../yearsFromDatabase';
+import { years } from './DataToForm';
 import { filterData } from './FilterData';
 
 const { REACT_APP_FILE_SERVER, REACT_APP_PATH_FILES_STORED, REACT_APP_ENV } =
@@ -31,11 +31,6 @@ const Form = props => {
 
   const [fieldYear, setFieldYear] = useState(1);
   const currentYear = new Date().getFullYear();
-  const [years, setYears] = useState([]);
-
-  useEffect(() => {
-    yearsFromDatabase(setYears);
-  }, []);
 
   useEffect(() => {
     setFieldYear(() => {
