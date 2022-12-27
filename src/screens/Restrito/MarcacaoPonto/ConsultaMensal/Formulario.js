@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import axios from 'axios';
 import toArray from 'lodash/toArray';
@@ -11,15 +11,22 @@ import {
 } from 'components-ui-cmjau';
 
 import { IndexStyles } from '../../Styles';
-import { months, years, headTimeCard } from './DataToSelects';
 import { getIndexYearFromArray } from '../../utils';
 import { getLabelYearFromArray } from '../../utils';
+import { months, headTimeCard } from './DataToSelects';
+import { yearsFromDatabase } from '../yearsFromDatabase';
 
 const Formulario = props => {
   const [dataTimeCard, setDataTimeCard] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
   const [fieldMonth, setFieldMonth] = useState(new Date().getMonth() + 1);
+
+  const [years, setYears] = useState([]);
+  useEffect(() => {
+    yearsFromDatabase(setYears);
+  }, []);
+
   const [fieldYear, setFieldYear] = useState(
     getIndexYearFromArray(years, new Date().getFullYear()),
   );
