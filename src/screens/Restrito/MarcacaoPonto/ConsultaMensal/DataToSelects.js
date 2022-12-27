@@ -49,25 +49,6 @@ const months = [
   },
 ];
 
-const years = [
-  {
-    label: '2022',
-    value: '1',
-  },
-  {
-    label: '2021',
-    value: '2',
-  },
-  {
-    label: '2020',
-    value: '3',
-  },
-  {
-    label: '2019',
-    value: '4',
-  },
-];
-
 const headTimeCard = {
   data: 'Dia',
   dia: 'Data',
@@ -83,4 +64,4 @@ const headTimeCard = {
   faltam: 'Faltam',
 };
 
-export { months, years, headTimeCard };
+export { months, headTimeCard };
