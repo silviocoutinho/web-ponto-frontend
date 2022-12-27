@@ -21,7 +21,6 @@ export const yearsFromDatabase = async setYears => {
   //, { headers: configHeadersAPI }
   try {
     response = await axios.get(`${baseURL}`);
-    console.log(response?.data);
     setYears(response?.data);
   } catch (error) {
     setYears(null);
