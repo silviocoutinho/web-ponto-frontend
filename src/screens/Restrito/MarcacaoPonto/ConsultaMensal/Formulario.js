@@ -27,6 +27,10 @@ const Formulario = props => {
     yearsFromDatabase(setYears);
   }, []);
 
+  useEffect(() => {
+    setFieldYear(getIndexYearFromArray(years, new Date().getFullYear()));
+  }, [years]);
+
   const [fieldYear, setFieldYear] = useState(
     getIndexYearFromArray(years, new Date().getFullYear()),
   );
@@ -113,7 +117,6 @@ const Formulario = props => {
     /* const selectedYears = years
       .filter(element => Number(element.value) === Number(fieldYear))
       .map(element => element.label); */
-
     const yearToFilter = getLabelYearFromArray(years, fieldYear);
     //console.log('selectedYear', yearToFilter);
     /* console.log(
