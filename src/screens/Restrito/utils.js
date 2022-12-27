@@ -1,8 +1,12 @@
 const getLabelYearFromArray = (years, yearFromSelect) => {
-  const result = years.filter(arrayOfYears => {
-    return arrayOfYears.value === yearFromSelect.toString();
-  });
-  return result[0].label;
+  try {
+    const result = years.filter(arrayOfYears => {
+      return arrayOfYears.value === yearFromSelect.toString();
+    });
+    return result[0].label;
+  } catch (error) {
+    return [];
+  }
 };
 
 const getIndexMonthFromArray = (months, fieldMonth) => {
