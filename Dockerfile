@@ -1,5 +1,5 @@
 #Build Stage
-FROM node:14 as build
+FROM node:14-alpine3.16 as build
 
 RUN mkdir /app
 WORKDIR /app
