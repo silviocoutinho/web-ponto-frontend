@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json /app
 COPY nginx-custom.conf /app
 
-RUN npm install
+RUN npm install --silent
 COPY . /app
 RUN npm run build
 
