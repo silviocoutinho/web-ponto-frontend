@@ -5,7 +5,7 @@ services:
     container_name: web-pontos-beta
     build: .
     networks:
-      - portal-servidores
+      - portal_servidores
     volumes:
       - ./:/app
     working_dir: /app
@@ -14,3 +14,6 @@ services:
     restart: always
     environment:
       HOST: 0.0.0.0
+networks:
+  portal_servidores:
+    external: true
