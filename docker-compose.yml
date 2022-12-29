@@ -10,7 +10,7 @@ services:
       - ./:/app
     working_dir: /app
     ports:
-      - '85:80'
+      - '88:80'
     restart: always
     environment:
       HOST: 0.0.0.0
