@@ -8,7 +8,7 @@ const checkData = (month, year, description, EmployeeRegistration, file) => {
     message: 'Tudo OK',
   };
 
-  if (Number(year) === currentYear && month > currentMonth) {
+  if (Number(year) === currentYear && month + 1 > currentMonth) {
     return {
       status: 'ERROR',
       message:
