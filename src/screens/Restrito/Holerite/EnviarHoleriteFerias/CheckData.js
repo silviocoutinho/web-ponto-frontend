@@ -8,7 +8,7 @@ const checkData = (month, year, description, EmployeeRegistration, file) => {
     message: 'Tudo OK',
   };
 
-  if (Number(year) === currentYear && month + 1 > currentMonth) {
+  if (monthIsNotValid) {
     return {
       status: 'ERROR',
       message:
@@ -35,5 +35,10 @@ const checkData = (month, year, description, EmployeeRegistration, file) => {
   }
   return resp;
 };
+
+const monthIsNotValid = (year, currentYear, month, currentMonth) => {
+  const nextMonth = currentMonth + 1;
+  return (Number(year) === currentYear && month > nextMonth);  
+}
 
 export { checkData };
