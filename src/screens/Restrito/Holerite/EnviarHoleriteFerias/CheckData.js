@@ -1,3 +1,9 @@
+const monthIsNotValid = (year, currentYear, month, currentMonth) => {
+  const nextMonth = currentMonth + 1;
+  return (Number(year) === currentYear && month > nextMonth);  
+}
+
+
 const checkData = (month, year, description, EmployeeRegistration, file) => {
   const now = new window.Date();
   const currentMonth = new window.Date(now).getMonth() + 1;
@@ -8,7 +14,7 @@ const checkData = (month, year, description, EmployeeRegistration, file) => {
     message: 'Tudo OK',
   };
 
-  if (monthIsNotValid) {
+  if (monthIsNotValid(year, currentYear, month, currentMonth)) {
     return {
       status: 'ERROR',
       message:
@@ -36,9 +42,5 @@ const checkData = (month, year, description, EmployeeRegistration, file) => {
   return resp;
 };
 
-const monthIsNotValid = (year, currentYear, month, currentMonth) => {
-  const nextMonth = currentMonth + 1;
-  return (Number(year) === currentYear && month > nextMonth);  
-}
 
 export { checkData };
