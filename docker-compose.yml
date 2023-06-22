@@ -4,11 +4,16 @@ services:
     image: web-pontos:beta
     container_name: web-pontos-beta
     build: .
+    networks:
+      - portal_servidores
     volumes:
       - ./:/app
     working_dir: /app
     ports:
-      - '85:80'
+      - '88:80'
     restart: always
     environment:
       HOST: 0.0.0.0
+networks:
+  portal_servidores:
+    external: true
