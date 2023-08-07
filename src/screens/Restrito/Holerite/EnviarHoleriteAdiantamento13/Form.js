@@ -30,6 +30,7 @@ const Form = props => {
   const [fieldEmployeeRegistration, setFieldEmployeeRegistration] =
     useState('');
   const [years, setYears] = useState([]);
+  const typeAdiantamento13 = 5;
 
   useEffect(() => {
     yearsFromDatabase(setYears);
@@ -92,7 +93,7 @@ const Form = props => {
         fieldDescription,
         fieldEmployeeRegistration,
         fileToUpload,
-        4, //Licenca Premio
+        typeAdiantamento13, 
         setTypeOfErrorMessage,
         setErrorMessage,
       );
