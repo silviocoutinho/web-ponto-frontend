@@ -23,6 +23,10 @@ const years = [
     label: '2024',
     value: '6',
   },
+  {
+    label: '2025',
+    value: '7',
+  },
 ];
 
 export { years };
