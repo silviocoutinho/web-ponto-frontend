@@ -23,7 +23,7 @@ const getIndexMonthFromArray = (months, fieldMonth) => {
 const getIndexYearFromArray = (years, selectedYear) => {
   try {
     const result = years.filter(arrayOfYears => {
-      return arrayOfYears.label === selectedYear.toString();
+      return arrayOfYears.label === selectedYear;
     });
     return result[0].value;
   } catch (error) {

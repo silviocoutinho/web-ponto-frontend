@@ -114,17 +114,8 @@ const Formulario = props => {
   };
 
   const filterData = () => {
-    /* const selectedYears = years
-      .filter(element => Number(element.value) === Number(fieldYear))
-      .map(element => element.label); */
-    const yearToFilter = getLabelYearFromArray(years, fieldYear);
-    //console.log('selectedYear', yearToFilter);
-    /* console.log(
-      currentYear < Number(yearToFilter),
-      currentYear,
-      yearToFilter,
-      currentYear === Number(yearToFilter),
-    ); */
+    const yearToFilter = getLabelYearFromArray(years, fieldYear);    
+    
     if (
       currentYear === Number(yearToFilter) &&
       Number(fieldMonth) > currentMonth
