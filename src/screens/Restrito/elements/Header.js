@@ -90,6 +90,47 @@ const Header = props => {
                 </NavDropdown.Item>
               </NavDropdown>
             )}
+
+            {props.auth.user.adm && (
+              <NavDropdown
+                title="Gestão de Usuários"
+                id="basic-nav-dropdown"
+                className="menu-usuario"
+              >
+                <NavDropdown.Item
+                  eventKey="1"
+                  as={Link}
+                  to="/restrito/manager-users"
+                >
+                  Todos Usuários
+                </NavDropdown.Item>   
+                <NavDropdown.Item
+                  eventKey="2"
+                  as={Link}
+                  to="/restrito/manager-users"
+                >
+                  Usuários Ativos
+                </NavDropdown.Item>   
+                <NavDropdown.Item
+                  eventKey="1"
+                  as={Link}
+                  to="/restrito/manager-users"
+                >
+                  Usuários Inativos
+                </NavDropdown.Item>  
+                <NavDropdown.Divider />  
+                <NavDropdown.Item
+                  eventKey="1"
+                  as={Link}
+                  to="/restrito/manager-users"
+                >
+                  Adicionar Usuários
+                </NavDropdown.Item>  
+                       
+              </NavDropdown>           
+            )}
+
+
             <NavDropdown
               title={props.auth.user.nome}
               id="basic-nav-dropdown"
