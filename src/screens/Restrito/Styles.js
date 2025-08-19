@@ -139,6 +139,13 @@ export const IndexStyles = styled.div`
     width: 7rem;
   }
 
+  .tabela-badge {
+    margin: 0rem;
+    width: 4rem;
+    font-size: 1rem;
+  }
+
+
   .formulario-item {
     margin-top: 1.5rem;
     font-size: 1.25rem;
