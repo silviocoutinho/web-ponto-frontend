@@ -1,15 +1,16 @@
 import {useState, useEffect} from 'react';
 import { Container } from 'react-bootstrap';
 
-import DataTable from './../../../components/DataTable';
+import DataTable from 'react-data-table-component';
+import { paginationOptions, customStyles } from './dataTableCSS'
 
 import {  Alert } from 'components-ui-cmjau';
 
 import { IndexStyles } from '../../Styles';
-import { HeaderTableDatabase } from './HeaderTableDatabase';
+import { columns } from './HeaderTableDatabase';
 import { setMessage } from './MessageNotification';
 
-const TabelaDados = ({title, dataDB, handleEdit, handleDelete}) => {  
+const TabelaDados = ({title, dataDB, handlersEdit, handlersDelete}) => {  
   const [errorMessage, setErrorMessage] = useState('');
   const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
 
@@ -22,7 +23,6 @@ const TabelaDados = ({title, dataDB, handleEdit, handleDelete}) => {
       clearTimeout(timeId)
     }
   }, [errorMessage]);
-  
     return (
         <IndexStyles>
 
@@ -33,11 +33,11 @@ const TabelaDados = ({title, dataDB, handleEdit, handleDelete}) => {
             )}
             {dataDB && (
               <DataTable
+                pagination
                 data={dataDB}
-                head={HeaderTableDatabase}
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-                
+                columns={columns(handlersEdit, handlersDelete)}  
+                customStyles={customStyles}   
+                paginationComponentOptions={paginationOptions}                      
               />
             )}
             {errorMessage && (
