@@ -18,10 +18,6 @@ const GestaoUsuarios = (props) => {
 
 
     const [dataDB, setDataDB] = useState();
-    const [dataDepartamento, setDataDepartamento] = useState({});
-    const [dataTipoUsuario, setDataTipoUsuario] = useState({});   
-    const [departamentoId, setDepartamentoId] = useState(0);
-    const [tipoUsuarioId, setTipoUsuarioId] = useState(0);
     
     const [selectedRecord, setSelectedRecord] = useState(null);
     const [isRemoving, setIsRemoving] = useState(false);
@@ -30,11 +26,27 @@ const GestaoUsuarios = (props) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
 
+    const handlersEdit = {
+      setDataDB,
+      setIsEditing,
+      setSelectedRecord,
+      setErrorMessage,
+      setTypeOfErrorMessage
+    }
+
+    const handlersDelete = {
+      setDataDB,
+      setIsRemoving,
+      setSelectedRecord,
+      setErrorMessage,
+      setTypeOfErrorMessage
+    }
+
     useEffect(() => {
         filterData(setTypeOfErrorMessage, setErrorMessage, setDataDB, 'funcionarios');            
       }, [isEditing]);
 
-      console.log('pos setdata');
+      //console.log('pos setdata');
 
       if (!props.auth.isAuth) {
         return <Redirect to="/login" />;
@@ -42,34 +54,6 @@ const GestaoUsuarios = (props) => {
       if (props.auth.user.adm !== true) {
         return <Redirect to="/restrito" />;
       }
-
-      // useEffect(() => {
-      //   filterData(setTypeOfErrorMessage, setErrorMessage, setDataDepartamento, 'departamentos');        
-      // }, []);
-
-      // useEffect(() => {
-      //   filterData(setTypeOfErrorMessage, setErrorMessage, setDataTipoUsuario, 'tipos-usuario');        
-      // }, []);
-
-      const handleEdit = record => {        
-        
-        setSelectedRecord(record);
-        setIsEditing(true);
-        
-        // const selectedDepto = dataDepartamento.filter(result => result.nome === record.departamento);
-        // const selectTipoUsuario = dataTipoUsuario.filter(result => result.nome === record.tipo);
-        
-        // setDepartamentoId(selectedDepto[0].id);
-        // setTipoUsuarioId(selectTipoUsuario[0].id);
-
-      }; 
-
-      const handleDelete = (id) => {
-        setIsRemoving(true);      
-        removeDataFromAPI(id, setTypeOfErrorMessage, setErrorMessage, setDataDB);
-      
-
-      };
 
     return(
         <IndexStyles>                      
@@ -81,9 +65,9 @@ const GestaoUsuarios = (props) => {
                         {!isEditing && (
                             <TabelaDados 
                                 title={"Gestão de Usuários"} 
-                                dataDB={dataDB}                                
-                                handleEdit={handleEdit}
-                                handleDelete={handleDelete}
+                                dataDB={dataDB} 
+                                handlersEdit={handlersEdit}
+                                handlersDelete={handlersDelete}
                             />
                         )}
                         {
