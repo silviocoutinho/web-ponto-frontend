@@ -13,7 +13,7 @@ const {
   REACT_APP_ENV,
 } = process.env;
 
-const RESOURCE = 'usuarios';
+const RESOURCE = 'funcionarios';
 const MAIN_ROUTE = `${REACT_APP_VERSION_API}/${RESOURCE}`;
 const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
 
@@ -29,7 +29,7 @@ const removeDataFromAPI = (
 ) => {
 
   const token = localStorage.getItem('token');  
-  const usuarioID = deleteDataID;
+  //const usuarioID = deleteDataID;
 
   const configHeadersAPI = {
     Authorization: 'Bearer ' + token,
@@ -40,8 +40,8 @@ const removeDataFromAPI = (
   }
 
   Swal.fire({          
-    title: 'Exclusão',
-    text: "Deseja excluir o registro???",
+    title: 'Desabilitar',
+    text: "Deseja tornar o registro desabilitado???",
     showCancelButton: true,
     confirmButtonText: 'Sim',
     confirmButtonColor: '#d80e40',
@@ -50,17 +50,17 @@ const removeDataFromAPI = (
     if (result.isConfirmed && atendeCondicoesExclusao(deleteDataID, token)) {         
       try {
         axios
-          .delete(apiURL + "/" + usuarioID, {       
+          .delete(apiURL + "/" + deleteDataID, {       
             headers: configHeadersAPI,
           })
           .then(res => {            
-            if (res.status === 201) {
-              filterData(setTypeOfErrorMessage, setErrorMessage, setDataDB, 'usuarios/detalhados');              
+            if (res.status === 204) {
+              filterData(setTypeOfErrorMessage, setErrorMessage, setDataDB, 'funcionarios');              
               setMessage(
                 setTypeOfErrorMessage,
                 setErrorMessage,
                 'success',
-                'Registro Excluído corretamente!',
+                'Registro Desabilitado corretamente!',
               );                     
             }           
           })
