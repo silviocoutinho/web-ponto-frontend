@@ -25,19 +25,6 @@ const getDataFromAPI = (
   const apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
   axios.defaults.baseURL = apiURL;
 
-  console.log('aradksfjkadlsjf')
-
-  const removePassword =(arrayDB)=>{   
-   return arrayDB.map(record => {
-      return ({
-          id: record.fun_id,
-          nome: record.fun_nome,
-          matricula: record.fun_matricula,
-         
-      });
-    })     
-  }
-
 
   const token = localStorage.getItem('token');
 
@@ -60,8 +47,9 @@ const getDataFromAPI = (
           setDataDB(null);
           return;
         }      
-        const arrayDataToDB = toArray(dataPresentation(res.data));        
-        setDataDB(formatDataBySpecificOrder(arrayDataToDB, 'matricula', 'asc'));              
+        const arrayDataToDB = dataPresentation(res.data); 
+        console.log('======================================',arrayDataToDB);       
+        setDataDB((arrayDataToDB));              
       })
       .catch(err => {
         setDataDB(null);
