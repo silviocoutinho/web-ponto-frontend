@@ -43,7 +43,7 @@ const GestaoUsuarios = (props) => {
     }
 
     useEffect(() => {
-        filterData(setTypeOfErrorMessage, setErrorMessage, setDataDB, 'funcionarios');            
+        filterData(setTypeOfErrorMessage, setErrorMessage, setDataDB, 'funcionarios/nome');            
       }, [isEditing]);
 
       //console.log('pos setdata');
