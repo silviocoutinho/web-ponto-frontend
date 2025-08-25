@@ -1,16 +1,16 @@
 import { getDataFromAPI } from './DataFromDatabase';
 
 const filterData = ( 
-  setTypeOfErrorMessage,
-  setErrorMessage,
+  setGenericMessage,
   setDataDB,
   resourceName
+  
 ) => {
      getDataFromAPI(      
-      setTypeOfErrorMessage,
-      setErrorMessage,   
+      setGenericMessage,
       setDataDB,
       resourceName
+      
     );
  
 };
