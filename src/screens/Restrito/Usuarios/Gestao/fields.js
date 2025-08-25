@@ -2,7 +2,8 @@ const fields = [
     {  
     name: 'Cod.',
     selector: row => row.id,
-    width: "80px", // largura fixa menor
+    sortable: true,
+    width: "95px", // largura fixa menor
   },
   {
     name: 'Nome',
