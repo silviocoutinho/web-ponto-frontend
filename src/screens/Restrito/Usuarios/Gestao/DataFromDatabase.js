@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { toArray } from 'lodash';
-import { setMessage } from './MessageNotification';
+//import { toArray } from 'lodash';
 
-import { dataPresentation,formatDataBySpecificOrder } from './dataPresentation';
+import { badRequestCode } from './imports';
+import { ALERT_WARNING, ALERT_DANGER } from './imports';
+
+import { dataPresentation } from './dataPresentation';
 
 const {
   REACT_APP_PORT_API,
@@ -13,8 +15,7 @@ const {
 
 
 const getDataFromAPI = (  
-  setTypeOfErrorMessage,
-  setErrorMessage,
+  setGenericMessage,
   setDataDB,
   resourceName
 ) => {
@@ -38,12 +39,11 @@ const getDataFromAPI = (
       })
       .then(res => {
         if (res.data.length === 0) {
-          setMessage(
-            setTypeOfErrorMessage,
-            setErrorMessage,
-            'warning',
-            'Não existem informações sobre Usuários!',
-          );
+           setGenericMessage(
+            {active: true, 
+              message: 'Não existem informações sobre Usuários!', 
+              type: ALERT_WARNING
+            });      
           setDataDB(null);
           return;
         }      
@@ -54,30 +54,27 @@ const getDataFromAPI = (
       .catch(err => {
         setDataDB(null);
         if (!err.response) {
-          setMessage(
-            setTypeOfErrorMessage,
-            setErrorMessage,
-            'danger',
-            'O Servidor está indisponível, contate o Setor de TI!',
-          );
-        } else if (err.response.status === 400) {
+          setGenericMessage(
+            {active: true, 
+              message: 'O Servidor está indisponível, contate o Setor de TI!', 
+              type: ALERT_WARNING
+            }); 
+        } else if (err.response.status === badRequestCode) {
           const code = err.response.status;
           const response = err.response.data.error;
-          setMessage(
-            setTypeOfErrorMessage,
-            setErrorMessage,
-            'danger',
-            `${response}.`,
-          );
+          setGenericMessage(
+            {active: true, 
+              message: `${response} - Cód: ${code}`, 
+              type: ALERT_DANGER
+            }); 
         } else {
           const code = err.response.status;
           const response = err.response.data;
-          setMessage(
-            setTypeOfErrorMessage,
-            setErrorMessage,
-            'danger',
-            `Estamos com problemas no Servidor. Mensagem: ${response}. Código: ${code}`,
-          );
+          setGenericMessage(
+            {active: true, 
+              message: `Estamos com problemas no Servidor. Mensagem: ${response}. Código: ${code}`, 
+              type: ALERT_DANGER
+            });         
         }
       });
   } catch (error) {
