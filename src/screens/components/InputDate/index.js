@@ -9,12 +9,14 @@ import el from 'date-fns/locale/pt-BR';
 
 import { ComponentStyles } from './Styles';
 
-const InputDate = ({ fieldName, value, label = '',  onChange, disabled=false, ...rest }) => {
+const InputDate = ({ fieldName, value, label = '',  
+                    onChange, disabled=false, height='', 
+                    positionIcon='', fontSize, ...rest }) => {
   const componentRef = useRef(HTMLSelectElement);
   registerLocale('el', el);
   
   return (
-    <ComponentStyles>     
+    <ComponentStyles  height={height} positionIcon={positionIcon} fontSize={fontSize}>     
       <Form.Group>  
       <Col>  
         <Row>                  
@@ -28,7 +30,8 @@ const InputDate = ({ fieldName, value, label = '',  onChange, disabled=false, ..
               locale="el"            
               dateFormat="dd/MM/yyyy"
               disabled={disabled}
-              ref={componentRef}
+              ref={componentRef}            
+              
           />
         </Row>
       </Col>      
