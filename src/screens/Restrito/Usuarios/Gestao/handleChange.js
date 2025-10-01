@@ -7,12 +7,12 @@ export  const handleChange = (field, evt, form, setForm, mode)  => {
             [field]: formatDateToPresentation(evt)
         });
     } 
-    else if (field === 'destino') {
+    else if (field === 'ativo') {
+        evt.target.value = (evt.target.value === 'on') ? 'off' : 'on';
         setForm({
             ...form,
-            [field]: evt.target.value
-            
-        }); 
+            [field]: (evt.target.value === 'on') ? 1 : 0            
+        });  
     }  
     else {
         setForm({
