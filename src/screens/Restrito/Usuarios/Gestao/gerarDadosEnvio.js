@@ -1,27 +1,16 @@
-import { naoExisteValor } from "../validacaoDados";
+import { formatDateISO } from "./dataPresentation";
 
 const gerarDadosParaEnvio = ( 
- id, form
+ form
 ) => {
-
-  if(naoExisteValor(form.password) || naoExisteValor(form.confirmPassword)){
-    return {
-      id: id,
-      nome: form.nome,
-      email: form.email,
-      departamentoID:form.departamento,
-      tipoUsuarioID: form.tipoUsuario     
-    }
-  }
  
   return {
-    id: id,
-    nome: form.nome,
-    email: form.email,
-    departamentoID:form.departamento,
-    tipoUsuarioID: form.tipoUsuario,
-    password: form.password,
-    confirmPassword: form.confirmPassword   
+    fun_nome: form.nome,
+    fun_data_cadastro: formatDateISO(form.data_cadastro),
+    fun_matricula: form.matricula,   
+    fun_pis: form.pis, 
+    fun_email : form.email,
+    fun_ativo: form.ativo,
   };
  
 };
