@@ -7,7 +7,7 @@ export  const handleChange = (field, evt, form, setForm, mode)  => {
             [field]: formatDateToPresentation(evt)
         });
     } 
-    else if (field === 'ativo') {
+    else if (field === 'ativo' || field === 'adm') {
         evt.target.value = (evt.target.value === 'on') ? 'off' : 'on';
         setForm({
             ...form,
