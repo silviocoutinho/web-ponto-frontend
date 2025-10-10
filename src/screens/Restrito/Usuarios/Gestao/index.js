@@ -8,6 +8,7 @@ import { Menu } from './imports';
 
 import TabelaDados from './TabelaDados';
 import FormularioAlterar from './FormularioAlterar';
+import FormularioCadastrar from './FormularioCadastrar';
 
 import { filterData } from './FilterData';
 
@@ -22,10 +23,16 @@ const GestaoUsuarios = (props) => {
     const [selectedRecord, setSelectedRecord] = useState(null);
     const [isRemoving, setIsRemoving] = useState(false);
     const [isEditing, setIsEditing] = useState(false);   
+    const [isInserting, setIsInserting] = useState(false); 
 
     const [errorMessage, setErrorMessage] = useState('');
     const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
     const [genericMessage, setGenericMessage] = useState({active: false, message: '', type: 'alert alert-danger'});
+
+    const handlersInsert = () => {
+      setIsInserting(true);
+      console.log("change handle insert");
+    }
 
     const handlersEdit = {
       setDataDB,
@@ -63,12 +70,13 @@ const GestaoUsuarios = (props) => {
                 <Row>
                     <Col xs={3} md={2} className='menu-lateral'><Menu /></Col>  
                     <Col xs={9} md={10} className='principal'>
-                        {!isEditing && (
+                        {!isEditing && !isInserting  &&  (
                             <TabelaDados 
                                 title={"Gestão de Usuários"} 
                                 dataDB={dataDB} 
                                 handlersEdit={handlersEdit}
                                 handlersDelete={handlersDelete}
+                                handlersInsert={handlersInsert}
                             />
                         )}
                         {
@@ -78,6 +86,13 @@ const GestaoUsuarios = (props) => {
                               record={selectedRecord}                             
                               dataDB={dataDB}
                               setIsEditing={setIsEditing}
+                            />
+                          }
+                          {
+                            isInserting &&
+                            <FormularioCadastrar
+                              title={"Gestão de Usuários - Cadastro"}                                                                   
+                              setIsInserting={setIsInserting}
                             />
                           }
                     </Col>                 
