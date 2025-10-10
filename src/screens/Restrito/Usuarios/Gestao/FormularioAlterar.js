@@ -66,18 +66,13 @@ const FormularioAlterar = ({title, record, dataDB, setIsEditing}) => {
     const token = localStorage.getItem('token');
     const dadosParaEnvio = gerarDadosParaEnvio(form);
 
-    const apiURL = setUrl('funcionario/'+record.id);  
+    const apiURL = setUrl('funcionarios/'+record.id);  
     axios.defaults.baseURL = apiURL;
 
-
     evt.preventDefault();
-
-    console.log('Dados para Envio ::: ', dadosParaEnvio);
-    console.log('setURL', apiURL);
     setGenericMessage({active: false, message: '', type: ALERT_DANGER}); 
 
     putDataToAPI(dadosParaEnvio, apiURL, token, setGenericMessage, setIsEditing  );
-
 
   };
 
