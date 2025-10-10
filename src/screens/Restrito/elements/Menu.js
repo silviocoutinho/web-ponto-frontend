@@ -14,6 +14,7 @@ const Menu = () => {
   const [openHolerite, setOpenHolerite] = useState(true);
 
   return (
+    <>
     <div>
       <div className="menu-lateral-titulo">
         <h5>
@@ -71,6 +72,7 @@ const Menu = () => {
         </Link>
       </Button>
     </div>
+    </>
   );
 };
 
