@@ -82,8 +82,7 @@ const FormularioAlterar = ({title, record, dataDB, setIsEditing}) => {
     <>
         <FormBase 
             title={title} 
-            method={"Alterar Funcionários"}
-            dataDB={dataDB}             
+            method={"Alterar Funcionários"}                        
             form={form} 
             setForm={setForm}              
             sendData={sendData} 
@@ -91,6 +90,7 @@ const FormularioAlterar = ({title, record, dataDB, setIsEditing}) => {
             onChange={onChange}
             genericMessage={genericMessage}
             setGenericMessage={setGenericMessage}
+            whichMethod={"update"}
         />
     </>
 
