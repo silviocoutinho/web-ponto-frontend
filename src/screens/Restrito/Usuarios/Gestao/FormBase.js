@@ -5,11 +5,8 @@ import { Container, Form, Col, Button, Jumbotron, Badge } from 'react-bootstrap'
 import { IndexStyles } from '../../Styles';
 import { Input, TagText, InputDate, Message, CheckBox } from './imports';
 
-const FormBase = ({title, method, dataDB, form, setForm, sendData, clear, onChange, genericMessage, setGenericMessage}) => {
-
-  console.log('Form Base :::',form);
-
-
+const FormBase = ({title, method, form, setForm, sendData, clear, onChange, genericMessage, setGenericMessage, whichMethod}) => {
+  
   return (
             <IndexStyles>
               <h1>{title}</h1>
@@ -75,14 +72,56 @@ const FormBase = ({title, method, dataDB, form, setForm, sendData, clear, onChan
                       />
                     </Col>
                   </Form.Row>
-                    <CheckBox 
-                      fieldName={'ativo'} 
-                      checked={form.ativo} 
-                      label='Ativo' 
-                      onChange={onChange('ativo')}
-                    />
                   <Form.Row>
-
+                    <Col>
+                       <CheckBox 
+                        fieldName={'ativo'} 
+                        checked={form.ativo} 
+                        label='Ativo' 
+                        onChange={onChange('ativo')}
+                      />
+                    </Col>
+                   
+                    {
+                      (whichMethod === 'insert') && (<>
+                        <Col>
+                          <CheckBox 
+                            fieldName={'adm'} 
+                            checked={form.adm} 
+                            label='Admnistrador:' 
+                            onChange={onChange('adm')}
+                          />  
+                        </Col>
+                      </>)
+                    }
+                  </Form.Row>
+                  <Form.Row>
+                    {
+                      (whichMethod === 'insert') && (
+                        <>
+                          <Col>
+                            <Input 
+                              fieldName={'password'} 
+                              value={form.password} 
+                              label = 'Senha:'  
+                              placeholder={'Digite o password'}
+                              onChange={onChange('password')}     
+                              size={'lg'}                
+                            />
+                          </Col>
+                          <Col>
+                            <Input 
+                              fieldName={'confirmPasswd'} 
+                              value={form.confirmPasswd} 
+                              label = 'Confirme a Senha:'  
+                              placeholder={'Confirme a sua Senha'}
+                              onChange={onChange('confirmPasswd')}     
+                              size={'lg'}                
+                            />
+                          </Col>
+                        </>
+                      )
+                    }
                   </Form.Row>
 
                      <Message active={genericMessage.active} message={genericMessage.message} type={genericMessage.type} />
