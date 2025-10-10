@@ -3,7 +3,7 @@ import { filterData } from './FilterData';
 
 import { Container, Form, Col, Button, Jumbotron, Badge } from 'react-bootstrap';
 import { IndexStyles } from '../../Styles';
-import { Input, TagText } from './imports';
+import { Input, TagText, InputDate, Message, CheckBox } from './imports';
 
 const FormBase = ({title, method, dataDB, form, setForm, sendData, clear, onChange, genericMessage, setGenericMessage}) => {
 
@@ -41,14 +41,15 @@ const FormBase = ({title, method, dataDB, form, setForm, sendData, clear, onChan
                       />
                     </Col>
                     <Col>
-                      <Input 
+                      <InputDate 
                         fieldName={'data_cadastro'} 
                         value={form.data_cadastro} 
-                        label = 'Data de Cad.:'  
-                        placeholder={'Digite a Data de Cadastro do Funcionário'}
-                        onChange={onChange('data_cadastro')}     
-                        size={'lg'}  
-                        disabled={false}              
+                        label = 'Data Cadastro:'  
+                        onChange={onChange('data_cadastro')} 
+                        height={'3rem'}
+                        positionIcon={'.75rem'}
+                        fontSize={'1.25rem'}
+
                       />
                     </Col>
                   </Form.Row>
@@ -74,6 +75,26 @@ const FormBase = ({title, method, dataDB, form, setForm, sendData, clear, onChan
                       />
                     </Col>
                   </Form.Row>
+                    <CheckBox 
+                      fieldName={'ativo'} 
+                      checked={form.ativo} 
+                      label='Ativo' 
+                      onChange={onChange('ativo')}
+                    />
+                  <Form.Row>
+
+                  </Form.Row>
+
+                     <Message active={genericMessage.active} message={genericMessage.message} type={genericMessage.type} />
+                   
+                    <div className='formulario-group-button'>                            
+                        <Button variant='primary' className='formulario-button' id='btnSalvar' onClick={sendData}>
+                            Salvar
+                        </Button>   
+                        <Button variant='danger' className='formulario-button' name='bntLimpar' onClick={clear}>
+                            Cancelar                    
+                        </Button>
+                    </div>                 
                 </Form>
                 </Jumbotron>
               </Container>

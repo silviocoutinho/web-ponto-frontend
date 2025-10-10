@@ -1,147 +1,105 @@
-import React, { useState } from 'react';
-import { Container, Form, Col, Button, Jumbotron, Badge } from 'react-bootstrap';
-
-import {  Alert, Select } from 'components-ui-cmjau';
-
+import { useState } from "react";
 import axios from 'axios';
 
-import { IndexStyles } from '../../Styles';
+import { ALERT_DANGER } from "./imports";
 
-import { gerarDadosParaEnvio } from './gerarDadosEnvio';
-import { dadosInvalidos, compararSenhaEConfirmacao } from './checkData';
+import FormBase from "./FormBase";
+import { handleChange } from "./handleChange"
+import { handleClearForm } from "./handleClearForm";
 
-const {
-    REACT_APP_PORT_API,
-    REACT_APP_URL_API,
-    REACT_APP_VERSION_API,
-    REACT_APP_ENV,
-  } = process.env;
-  
-  const RESOURCE = 'funcionarios';
-  const MAIN_ROUTE = `${REACT_APP_VERSION_API}/${RESOURCE}`;
-  const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
-  
-  const apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
-  
-  
-  axios.defaults.baseURL = apiURL;
+import { dadosInvalidosEdicao } from "./check/data";
+import { gerarDadosParaEnvio } from "./gerarDadosEnvio";
+import { setUrl } from '../setUrl';
+import { putDataToAPI } from './SendDataToAPI';
 
-const FormularioAlterar = ({title, user, depto, departamentoId, tipoUsuarioId, tipoUsuario, setIsEditing}) => {
-    const [form, setForm] = useState({
-        nome: user.fun_nome,
-       
-    });
-   
-    const [isValidForm, setIsValidForm] = useState(true);
-    const [genericMessage, setGenericMessage] = useState({active: false, message: '', type: 'alert alert-danger'});
-     
-    const onChange = field => evt => { 
-        if (field === 'confirmPassword') {        
-            compararSenhaEConfirmacao(form.password, evt.target.value, setGenericMessage);
-       }                         
-        setForm({
-            ...form,
-            [field]: evt.target.value
-        });           
-    };
+/*
 
-    const clear = () => {
-        setForm({
-            ...form,
-            nome: '',           
-        });
-        setIsEditing(false);
-        setGenericMessage({active: false, message: '', type: 'alert alert-danger'});
+
+    192.168.0.12:3005/v1/funcionarios/adicionar
+*/
+
+
+const FormularioAlterar = ({title, record, dataDB, setIsEditing}) => { 
+  const extractBoolenValueFromField = (record, field) => {
+    return  record[field].props.children.props.children === "Sim" ? 1 : 0;
+  }
+
+  const [form, setForm] = useState({
+    //fun_adm: record.fun_adm,
+    nome: record.nome,
+    data_cadastro: record.data_cadastro,
+    matricula: record.matricula,   
+    pis: record.pis, 
+    email : record.email,
+    ativo: extractBoolenValueFromField(record, 'ativo')
+  });
+
+  const dadosOriginais = {    
+    nome: record.nome,
+    data_cadastro: record.data_cadastro,
+    matricula: record.matricula,   
+    pis: record.pis, 
+    email : record.email,
+    ativo: extractBoolenValueFromField(record, 'ativo')
+  };
+
+  const [genericMessage, setGenericMessage] = useState({active: false, message: '', type: ALERT_DANGER});
+
+  const onChange = field => evt => {  
+    handleChange(field, evt, form, setForm);          
+  };
+  
+  const clear = () => {
+    handleClearForm(form, setForm, setIsEditing, setGenericMessage);
+  }
+
+  const sendData = (evt) => {
+    if (dadosInvalidosEdicao(form,  dadosOriginais, setGenericMessage)){
+      return;
     }
 
-    const sendData = (evt) => {      
-        if (dadosInvalidos(form, setGenericMessage)){
-            return;
-        }
-
-        const token = localStorage.getItem('token');      
-        setGenericMessage({active: false, message: '', type: 'alert alert-danger'});  
-        const dadosUsuario = gerarDadosParaEnvio(user.id, form);                
-        evt.preventDefault();
-        axios.post(apiURL, 
-        dadosUsuario,
-        { 
-            headers: {            
-            Authorization: 'Bearer ' + token
-        }
-        }).then((res) => {              
-            if (res.status === 201) {
-                setGenericMessage({active: true, message: 'Dados enviados com sucesso!', type: 'alert alert-success'});  
-                setIsEditing(false);                         
-            }
-        }).catch(err => {
-            if (err.response.status === 400){
-                setGenericMessage({active: true, message: err.response.data.error, type: 'alert alert-danger'});
-            }
-        });
+    if (JSON.stringify(form) === JSON.stringify(dadosOriginais)){
+      setIsEditing(false);
+      return;
     }
 
-    return (
-        <IndexStyles>
-            <h1>{title}</h1>
-            <Container className='meio'>            
-                <Jumbotron className='formulario-jumbotron shadow p-5 mb-1 rounded'>
-                <Form action=''  encType='multipart/form-data'>
-                    <p className='formulario-info'>
-                    <span>                       
-                        <Badge variant='success' className='formulario-alterar-badge'>Alterando Registro: { user.id }</Badge>
-                    </span>       
-                    
-                    </p>
-                    <Form.Group  controlId='formGridUpdateItem formulario-group'>                      
-                        <Form.Label className='formulario-item formulario-label'>Nome:</Form.Label>
-                        <Form.Control size='sm' type='text' value={form.nome} onChange={onChange('nome')} placeholder='Digite o nome' />                        
-                    </Form.Group>
-                    <Form.Group  controlId='formGridUpdateItem'>                      
-                        <Form.Label className='formulario-item formulario-label'>E-mail:</Form.Label>
-                        <Form.Control size='sm' type='text' value={form.email} onChange={onChange('email')} placeholder='Digite o e-mail' />                        
-                    </Form.Group>                
+    const token = localStorage.getItem('token');
+    const dadosParaEnvio = gerarDadosParaEnvio(form);
 
-                    <Form.Row>
-                    <Col>
-                        <Form.Group  controlId='formGridUpdateItem'>                      
-                            <Form.Label className='formulario-item formulario-label'>Password:</Form.Label>
-                            <Form.Control size='sm' type='password' value={form.password} onChange={onChange('password')} placeholder='Digite o password' />                        
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group  controlId='formGridUpdateItem'>                      
-                            <Form.Label className='formulario-item formulario-label'>Confirmar Password:</Form.Label>
-                            <Form.Control size='sm' type='password' value={form.confirmPassword} onChange={onChange('confirmPassword')} placeholder='Confirme o password' />                        
-                        </Form.Group>  
-                    </Col>
-                    </Form.Row>
-                    <div className='formulario-group-button'> 
-                    { !isValidForm &&
-                        <div className="alert alert-danger formulario-aviso-erro" role="alert">
-                            Valor inválido!!!
-                        </div>
-                    }
-                    {
-                        genericMessage.active &&
-                        <div className={genericMessage.type + ' formulario-aviso-erro'}  role="alert">
-                            { genericMessage.message }
-                        </div>
-                    }    
-                    </div>
-                    <div className='formulario-group-button'>                            
-                        <Button variant='primary' className='formulario-button' id='btnSalvar' onClick={sendData}>
-                            Salvar
-                        </Button>      
-                        <Button variant='danger' className='formulario-button' name='bntCancelar' onClick={clear}>
-                            Cancelar                    
-                        </Button>
-                    </div>
-                    </Form>
-                </Jumbotron>
-            </Container>
-        </IndexStyles>       
+    const apiURL = setUrl('funcionario/'+record.id);  
+    axios.defaults.baseURL = apiURL;
 
-    )
+
+    evt.preventDefault();
+
+    console.log('Dados para Envio ::: ', dadosParaEnvio);
+    console.log('setURL', apiURL);
+    setGenericMessage({active: false, message: '', type: ALERT_DANGER}); 
+
+    putDataToAPI(dadosParaEnvio, apiURL, token, setGenericMessage, setIsEditing  );
+
+
+  };
+
+
+
+  return (
+    <>
+        <FormBase 
+            title={title} 
+            method={"Alterar Funcionários"}
+            dataDB={dataDB}             
+            form={form} 
+            setForm={setForm}              
+            sendData={sendData} 
+            clear={clear}
+            onChange={onChange}
+            genericMessage={genericMessage}
+            setGenericMessage={setGenericMessage}
+        />
+    </>
+
+)
+
 };
 export default FormularioAlterar;

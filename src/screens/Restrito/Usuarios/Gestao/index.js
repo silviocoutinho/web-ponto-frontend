@@ -3,15 +3,15 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Header from '../../elements/Header';
-import Menu from '../../elements/Menu';
+import { Header } from './imports';
+import { Menu } from './imports';
 
 import TabelaDados from './TabelaDados';
 import FormularioAlterar from './FormularioAlterar';
-import {removeDataFromAPI} from './RemoveDataFromDatabase'
+
 import { filterData } from './FilterData';
 
-import { IndexStyles } from '../../Styles';
+import { IndexStyles } from './imports';
 
 
 const GestaoUsuarios = (props) => { 
@@ -25,6 +25,7 @@ const GestaoUsuarios = (props) => {
 
     const [errorMessage, setErrorMessage] = useState('');
     const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
+    const [genericMessage, setGenericMessage] = useState({active: false, message: '', type: 'alert alert-danger'});
 
     const handlersEdit = {
       setDataDB,
@@ -43,7 +44,7 @@ const GestaoUsuarios = (props) => {
     }
 
     useEffect(() => {
-        filterData(setTypeOfErrorMessage, setErrorMessage, setDataDB, 'funcionarios/nome');            
+        filterData(setGenericMessage, setDataDB, 'funcionarios/nome');            
       }, [isEditing]);
 
       //console.log('pos setdata');
@@ -73,8 +74,9 @@ const GestaoUsuarios = (props) => {
                         {
                             isEditing &&
                             <FormularioAlterar 
-                              title={"Alteração de Usuário"}  
-                              user={selectedRecord}                             
+                              title={"Alteração de Usuário"}
+                              record={selectedRecord}                             
+                              dataDB={dataDB}
                               setIsEditing={setIsEditing}
                             />
                           }
