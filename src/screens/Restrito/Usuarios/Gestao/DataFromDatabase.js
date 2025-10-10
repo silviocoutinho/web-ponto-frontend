@@ -48,7 +48,7 @@ const getDataFromAPI = (
           return;
         }      
         const arrayDataToDB = dataPresentation(res.data); 
-        console.log('======================================',arrayDataToDB);       
+              
         setDataDB((arrayDataToDB));              
       })
       .catch(err => {
