@@ -160,6 +160,27 @@ export const IndexStyles = styled.div`
   .formulario-aviso-erro {
     width: 35rem;
   }
+
+  .formulario-group-button {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .formulario-group {
+    margin: 0rem!important;
+  }
+
+  .tabela-button {
+    font-size: 1rem;
+    font-weight: 600;
+    width: 15rem; 
+    background: #1079d5 ;
+    margin-left: 1rem;
+  }
+  .tabela-titulo  {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
 `;
 
 export const HeaderStyles = styled.div`
