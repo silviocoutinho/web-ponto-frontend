@@ -15,6 +15,7 @@
     "formik": "^2.2.6",
     "grommet-icons": "^4.7.0",
     "grommet-styles": "^0.2.0",
+    "js-brasil": "^2.6.4",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
