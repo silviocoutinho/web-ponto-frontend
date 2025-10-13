@@ -1,18 +1,11 @@
 import axios from 'axios';
-//import { toArray } from 'lodash';
+import { setUrl } from '../setUrl';
+
 
 import { badRequestCode } from './imports';
 import { ALERT_WARNING, ALERT_DANGER } from './imports';
 
 import { dataPresentation } from './dataPresentation';
-
-const {
-  REACT_APP_PORT_API,
-  REACT_APP_URL_API,
-  REACT_APP_VERSION_API,
-  REACT_APP_ENV,
-} = process.env;
-
 
 const getDataFromAPI = (  
   setGenericMessage,
@@ -20,10 +13,7 @@ const getDataFromAPI = (
   resourceName
 ) => {
 
-  const RESOURCE = resourceName;
-  const MAIN_ROUTE = `${REACT_APP_VERSION_API}/${RESOURCE}`;
-  const envURL = REACT_APP_ENV === 'test' ? '' : 'http://';
-  const apiURL = `${envURL}${REACT_APP_URL_API}:${REACT_APP_PORT_API}/${MAIN_ROUTE}`;
+  const apiURL = setUrl(resourceName);
   axios.defaults.baseURL = apiURL;
 
 
