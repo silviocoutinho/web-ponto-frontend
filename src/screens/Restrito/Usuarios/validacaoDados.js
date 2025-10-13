@@ -3,6 +3,7 @@ import { validateBr } from 'js-brasil';
 const naoExisteValor = (value) => {
     if (!value) return true;
     if (value === '') return true;
+    if (value === null) return true;
     if (Array.isArray(value) && value.length === 0) return true;
     if (typeof value === "string" && !value.trim()) return true;
     return false;
