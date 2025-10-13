@@ -1,42 +1,27 @@
-import { naoExisteValor, PISInvalido, EmailInvalido } from "../../validacaoDados";
-
+import { naoExisteValor } from "../../validacaoDados";
+import { checkAllFields } from "./iterateFields";
 import { checkSpecialValues } from './specialValues';
+import { formcheckEdit, formcheckNew } from "./formCheck";
 
 import { ALERT_DANGER } from "../imports";
 
 export const dadosInvalidos = (  form, setGenericMessage  ) => {
 
+  let message = '';  
   let result = false;
-  let message = '';
-  let fieldError = '';
 
-  const formForCheck = {
-    nome: 'Nome',
-    data_cadastro: 'Data de Cadastro',
-    matricula: 'Matrícula',   
-    pis: 'PIS', 
-    email : 'E-mail',
-    ativo: 'Ativo'
-  }
+  const formForCheck = formcheckNew();
+  console.log(typeof formForCheck);
 
-  Object.keys(formForCheck).forEach((value) => {  
-  if (naoExisteValor(form[value])) {
-      fieldError = (naoExisteValor(fieldError)) ? fieldError  : fieldError + ",";
-      fieldError = fieldError + ' ' + formForCheck[value];
-      result = true;
-      message =  'Digite o valor(es) para o(s) campo(s): ' ;
-    }
-  });
+  message = checkAllFields(form, formForCheck);
+  (message !== '' ? result = true : result = false)
 
-  if(PISInvalido(form.pis)) {
-    message = message + ' O Número do PIS é Inválido!';
+  const specialValues = checkSpecialValues(form);
+  if (specialValues !== null) {
+    message = message +  specialValues;
     result = true;
   }
-  
-  if(EmailInvalido(form.email)) {
-    message = message + ' O E-mail é Inválido!';
-    result = true;
-  }
+
 
   setGenericMessage(
     {active: result, 
@@ -64,13 +49,7 @@ export const dadosInvalidosEdicao = (  form, dadosOriginais, setGenericMessage  
     
   }
 
-  const fieldsForm = {
-    nome: 'Nome',
-    data_cadastro: 'Data de Cadastro',
-    matricula: 'Matrícula',   
-    pis: 'PIS', 
-    email : 'E-mail',
-  }
+  const fieldsForm = formcheckEdit();
 
   Object.keys(formForCheck).forEach((value) => {  
     if ((form[value] !== dadosOriginais[value]) && naoExisteValor(form[value])) {
@@ -78,7 +57,6 @@ export const dadosInvalidosEdicao = (  form, dadosOriginais, setGenericMessage  
        fieldError = fieldError + ' ' + fieldsForm[value];
        result = true;
      }
-     console.log()
   });
 
   message = (result) ? 'Digite o valor(es) para o(s) campo(s): ' : '';
