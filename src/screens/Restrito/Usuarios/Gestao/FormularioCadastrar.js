@@ -11,8 +11,8 @@ import { postDataToAPI } from './SendDataToAPI';
 import { handleChange } from './handleChange';
 import { handleClearForm } from './handleClearForm';
 
-//import { gerarDadosParaEnvioNovo } from './gerarDadosEnvio;
-import { dadosInvalidos } from './checkData';
+import { gerarDadosParaEnvioNovo } from './gerarDadosEnvio';
+import { dadosInvalidos } from './check/data';
 
 import { formatDateToPresentation } from './dataPresentation';
 
@@ -45,16 +45,18 @@ const FormularioCadastrar = ({title, setIsInserting}) => {
             return;
         }
 
-        const apiURL = setUrl('expediente/ordinarias/pdf/'+form.numero);  
+        const apiURL = setUrl('funcionarios/adicionar');  
         axios.defaults.baseURL = apiURL;
 
         const token = localStorage.getItem('token');      
-        // const dadosParaEnvio = gerarDadosParaEnvioNovo(form);              
+        const dadosParaEnvio = gerarDadosParaEnvioNovo(form);        
+        
+        console.log('Dados para Envio: ', dadosParaEnvio);
         
         setGenericMessage({active: false, message: '', type: ALERT_DANGER});  
         evt.preventDefault();
         
-        ///postDataToAPI(dadosParaEnvio, apiURL, token, setGenericMessage, setIsInserting);
+        postDataToAPI(dadosParaEnvio, apiURL, token, setGenericMessage, setIsInserting);
     }
 
     return (

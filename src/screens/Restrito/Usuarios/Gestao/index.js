@@ -52,7 +52,7 @@ const GestaoUsuarios = (props) => {
 
     useEffect(() => {
         filterData(setGenericMessage, setDataDB, 'funcionarios/nome');            
-      }, [isEditing]);
+      }, [isEditing, isInserting]);
 
       //console.log('pos setdata');
 
