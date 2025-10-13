@@ -15,11 +15,10 @@ export const dadosInvalidos = (  form, setGenericMessage  ) => {
   let message = '';  
   let result = false;
 
-  const formForCheck = formcheck(OperationType.NEW);
-  
+  const formForCheck = formcheck(OperationType.NEW);  
 
-  message = checkAllFields(form, formForCheck);
-  (message !== '' ? result = true : result = false)
+  message = checkAllFields(form, formForCheck);  
+
 
   const specialValues = checkSpecialValues(form);
   if (specialValues !== null) {
@@ -27,6 +26,7 @@ export const dadosInvalidos = (  form, setGenericMessage  ) => {
     result = true;
   }
 
+  (message !== '' ? result = true : result = false)
 
   setGenericMessage(
     {active: result, 
@@ -66,6 +66,8 @@ export const dadosInvalidosEdicao = (  form, dadosOriginais, setGenericMessage  
 
   message = (result) ? 'Digite o valor(es) para o(s) campo(s): ' : '';
   message = (naoExisteValor(fieldError)) ? message : `${message} ${fieldError}.`;
+
+  
 
   
   const specialValues = checkSpecialValues(form);
