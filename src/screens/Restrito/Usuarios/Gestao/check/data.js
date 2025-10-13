@@ -1,17 +1,22 @@
 import { naoExisteValor } from "../../validacaoDados";
 import { checkAllFields } from "./iterateFields";
 import { checkSpecialValues } from './specialValues';
-import { formcheckEdit, formcheckNew } from "./formCheck";
+import { formcheck } from "./formCheck";
 
 import { ALERT_DANGER } from "../imports";
+
+  const OperationType = {
+    NEW: 0,
+    EDIT: 1,
+  }
 
 export const dadosInvalidos = (  form, setGenericMessage  ) => {
 
   let message = '';  
   let result = false;
 
-  const formForCheck = formcheckNew();
-  console.log(typeof formForCheck);
+  const formForCheck = formcheck(OperationType.NEW);
+  
 
   message = checkAllFields(form, formForCheck);
   (message !== '' ? result = true : result = false)
@@ -49,7 +54,7 @@ export const dadosInvalidosEdicao = (  form, dadosOriginais, setGenericMessage  
     
   }
 
-  const fieldsForm = formcheckEdit();
+  const fieldsForm = formcheck(OperationType.EDIT);
 
   Object.keys(formForCheck).forEach((value) => {  
     if ((form[value] !== dadosOriginais[value]) && naoExisteValor(form[value])) {
