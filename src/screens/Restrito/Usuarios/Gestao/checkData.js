@@ -15,7 +15,7 @@ const dadosInvalidos = (
       return true;
   } 
 
-  if (valoresNaoIguais(form.password, form.confirmPassword)) {
+  if (valoresNaoIguais(form.password, form.confirmPasswd)) {
     setGenericMessage({active: true, message: 'Senhas não conferem!', type: 'alert alert-danger'});  
     return true;
   }
@@ -25,25 +25,8 @@ const dadosInvalidos = (
 };
 
 
-const compararSenhaEConfirmacao = (senha, confirmacao, setGenericMessage) => {
-  if (senha !== confirmacao) {
-    setGenericMessage(
-        {
-            active: true, 
-            message: 'Senhas não conferem!',
-            type: 'alert alert-warning'
-    })
-  }
-  if (senha === confirmacao) {
-    setGenericMessage(
-        {
-            active: false, 
-            message: '',
-            type: 'alert alert-warning'
-    })
-  }   
-};
 
 
 
-export { dadosInvalidos, compararSenhaEConfirmacao };
+
+export { dadosInvalidos };

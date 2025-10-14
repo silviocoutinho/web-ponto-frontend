@@ -35,7 +35,7 @@ export const putDataToAPI = (data, url, token, setGenericMessage, setGenericMeth
             headers: {            
             Authorization: 'Bearer ' + token
         }
-        }).then((res) => {              
+        }).then((res) => {            
             if (res.status === noContent) {
                 setGenericMessage(
                     {active: true, 

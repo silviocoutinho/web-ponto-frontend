@@ -55,7 +55,7 @@ export const dadosInvalidosEdicao = (  form, dadosOriginais, setGenericMessage  
   }
 
   const fieldsForm = formcheck(OperationType.EDIT);
-
+  
   Object.keys(formForCheck).forEach((value) => {  
     if ((form[value] !== dadosOriginais[value]) && naoExisteValor(form[value])) {
        fieldError = (naoExisteValor(fieldError)) ? fieldError  : fieldError + ",";
@@ -64,14 +64,13 @@ export const dadosInvalidosEdicao = (  form, dadosOriginais, setGenericMessage  
      }
   });
 
+
   message = (result) ? 'Digite o valor(es) para o(s) campo(s): ' : '';
   message = (naoExisteValor(fieldError)) ? message : `${message} ${fieldError}.`;
 
   
-
-  
   const specialValues = checkSpecialValues(form);
-  if (specialValues !== null) {
+  if (!naoExisteValor(specialValues) ) {
     message = message +  specialValues;
     result = true;
   }

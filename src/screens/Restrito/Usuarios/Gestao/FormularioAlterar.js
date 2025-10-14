@@ -12,11 +12,6 @@ import { gerarDadosParaEnvio } from "./gerarDadosEnvio";
 import { setUrl } from '../setUrl';
 import { putDataToAPI } from './SendDataToAPI';
 
-/*
-
-
-    192.168.0.12:3005/v1/funcionarios/adicionar
-*/
 
 
 const FormularioAlterar = ({title, record, dataDB, setIsEditing}) => { 
@@ -25,7 +20,6 @@ const FormularioAlterar = ({title, record, dataDB, setIsEditing}) => {
   }
 
   const [form, setForm] = useState({
-    //fun_adm: record.fun_adm,
     nome: record.nome,
     data_cadastro: record.data_cadastro,
     matricula: record.matricula,   
@@ -54,6 +48,7 @@ const FormularioAlterar = ({title, record, dataDB, setIsEditing}) => {
   }
 
   const sendData = (evt) => {
+    
     if (dadosInvalidosEdicao(form,  dadosOriginais, setGenericMessage)){
       return;
     }
@@ -65,6 +60,7 @@ const FormularioAlterar = ({title, record, dataDB, setIsEditing}) => {
 
     const token = localStorage.getItem('token');
     const dadosParaEnvio = gerarDadosParaEnvio(form);
+    
 
     const apiURL = setUrl('funcionarios/'+record.id);  
     axios.defaults.baseURL = apiURL;
