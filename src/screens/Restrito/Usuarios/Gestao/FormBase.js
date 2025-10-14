@@ -1,7 +1,4 @@
-import {useEffect} from 'react';
-import { filterData } from './FilterData';
-
-import { Container, Form, Col, Button, Jumbotron, Badge } from 'react-bootstrap';
+import { Container, Form, Col, Button, Jumbotron } from 'react-bootstrap';
 import { IndexStyles } from '../../Styles';
 import { Input, TagText, InputDate, Message, CheckBox } from './imports';
 
