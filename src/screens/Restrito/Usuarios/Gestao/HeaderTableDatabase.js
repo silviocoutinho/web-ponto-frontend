@@ -1,12 +1,13 @@
 import BotaoTabela from "./botaoTabela";
 import { handleDelete } from "./handleDelete";
 import { handleEdit } from "./handleEdit";
+import { handlePassword } from "./handlePassword";
 import { fields } from '././fields'
 import { ContextMenu } from "./components/ContextMenu";
 
 
-const columns =(handlersEdit, handlersDelete)=> {
-
+const columns =(handlersEdit, handlersDelete, handlersPassword)=> {
+ 
   const buttons = 
     {
     name: "Ações",
@@ -28,7 +29,11 @@ const columns =(handlersEdit, handlersDelete)=> {
               handlers={handlersDelete}
               row={row}
             />
-            <ContextMenu row={row}/>
+            <ContextMenu 
+                handle={handlePassword} 
+                handlers={handlersPassword}
+                row={row} 
+            />
         </div>
     ),
     ignoreRowClick: true,
