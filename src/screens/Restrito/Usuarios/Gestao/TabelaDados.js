@@ -12,10 +12,10 @@ import { setMessage } from './MessageNotification';
 
 
 
-const TabelaDados = ({title, dataDB, handlersEdit, handlersDelete, handlersInsert}) => {  
+const TabelaDados = ({title, dataDB, handlersEdit, handlersDelete, handlersInsert, handlersPassword}) => {  
   const [errorMessage, setErrorMessage] = useState('');
   const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
-
+  
   useEffect(() => {
     const timeId = setTimeout(() => {      
       setMessage(setTypeOfErrorMessage, setErrorMessage, 'warning', null);
@@ -50,7 +50,7 @@ const TabelaDados = ({title, dataDB, handlersEdit, handlersDelete, handlersInser
               <DataTable
                 pagination
                 data={dataDB}
-                columns={columns(handlersEdit, handlersDelete)}  
+                columns={columns(handlersEdit, handlersDelete, handlersPassword)}  
                 customStyles={customStyles}   
                 paginationComponentOptions={paginationOptions} 
                                    

@@ -1,4 +1,4 @@
-const BotaoTabela = ({ label, color, handle, handlers,row}) => {
+const BotaoTabela = ({ label, color, handle, handlers, row}) => {
   return (
     <div>
       <button

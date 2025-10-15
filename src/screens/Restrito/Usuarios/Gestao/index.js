@@ -24,6 +24,7 @@ const GestaoUsuarios = (props) => {
     const [isRemoving, setIsRemoving] = useState(false);
     const [isEditing, setIsEditing] = useState(false);   
     const [isInserting, setIsInserting] = useState(false); 
+    const [changingPassword, setChangingPassword] = useState(false);
 
     const [errorMessage, setErrorMessage] = useState('');
     const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
@@ -50,9 +51,18 @@ const GestaoUsuarios = (props) => {
       setTypeOfErrorMessage
     }
 
+    const handlersPassword = {
+      setDataDB,
+      setChangingPassword,
+      setSelectedRecord,
+      setErrorMessage,
+      setTypeOfErrorMessage
+    }
+
+
     useEffect(() => {
         filterData(setGenericMessage, setDataDB, 'funcionarios/nome');            
-      }, [isEditing, isInserting]);
+      }, [isEditing, isInserting, changingPassword]);
 
       //console.log('pos setdata');
 
@@ -77,6 +87,7 @@ const GestaoUsuarios = (props) => {
                                 handlersEdit={handlersEdit}
                                 handlersDelete={handlersDelete}
                                 handlersInsert={handlersInsert}
+                                handlersPassword={handlersPassword}
                             />
                         )}
                         {
