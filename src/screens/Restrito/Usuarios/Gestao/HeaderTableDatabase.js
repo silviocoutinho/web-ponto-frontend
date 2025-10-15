@@ -2,25 +2,8 @@ import BotaoTabela from "./botaoTabela";
 import { handleDelete } from "./handleDelete";
 import { handleEdit } from "./handleEdit";
 import { fields } from '././fields'
-import {  NavDropdown  } from 'react-bootstrap';
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { FormStyles } from "../StylesForm";
+import { ContextMenu } from "./components/ContextMenu";
 
-const ContextMenu = () =>{
-  return (
-    <FormStyles>
-      <NavDropdown
-        title={<BsThreeDotsVertical size={20} />}
-        id="basic-nav-dropdown"
-        className="menu-usuario"
-      >
-        <NavDropdown.Item eventKey="1" onClick={console.log('Teste Menu')}>
-          Alterar Senha
-        </NavDropdown.Item>
-      </NavDropdown>
-    </FormStyles>
-  )
-}
 
 const columns =(handlersEdit, handlersDelete)=> {
 
@@ -45,7 +28,7 @@ const columns =(handlersEdit, handlersDelete)=> {
               handlers={handlersDelete}
               row={row}
             />
-            <ContextMenu />
+            <ContextMenu row={row}/>
         </div>
     ),
     ignoreRowClick: true,
