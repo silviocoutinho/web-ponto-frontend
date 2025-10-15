@@ -10,6 +10,8 @@ import { IndexStyles } from './imports';
 import { columns } from './HeaderTableDatabase';
 import { setMessage } from './MessageNotification';
 
+
+
 const TabelaDados = ({title, dataDB, handlersEdit, handlersDelete, handlersInsert}) => {  
   const [errorMessage, setErrorMessage] = useState('');
   const [typeOfErrorMessage, setTypeOfErrorMessage] = useState('danger');
@@ -50,7 +52,8 @@ const TabelaDados = ({title, dataDB, handlersEdit, handlersDelete, handlersInser
                 data={dataDB}
                 columns={columns(handlersEdit, handlersDelete)}  
                 customStyles={customStyles}   
-                paginationComponentOptions={paginationOptions}                      
+                paginationComponentOptions={paginationOptions} 
+                                   
               />
             )}
             {errorMessage && (
