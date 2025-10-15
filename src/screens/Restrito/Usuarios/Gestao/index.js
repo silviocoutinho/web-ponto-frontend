@@ -9,6 +9,7 @@ import { Menu } from './imports';
 import TabelaDados from './TabelaDados';
 import FormularioAlterar from './FormularioAlterar';
 import FormularioCadastrar from './FormularioCadastrar';
+import FormularioPassword from './FormularioPassword';
 
 import { filterData } from './FilterData';
 
@@ -64,8 +65,7 @@ const GestaoUsuarios = (props) => {
         filterData(setGenericMessage, setDataDB, 'funcionarios/nome');            
       }, [isEditing, isInserting, changingPassword]);
 
-      //console.log('pos setdata');
-
+     
       if (!props.auth.isAuth) {
         return <Redirect to="/login" />;
       }
@@ -80,7 +80,7 @@ const GestaoUsuarios = (props) => {
                 <Row>
                     <Col xs={3} md={2} className='menu-lateral'><Menu /></Col>  
                     <Col xs={9} md={10} className='principal'>
-                        {!isEditing && !isInserting  &&  (
+                        {!isEditing && !isInserting  && !changingPassword && (
                             <TabelaDados 
                                 title={"Gestão de Usuários"} 
                                 dataDB={dataDB} 
@@ -105,6 +105,15 @@ const GestaoUsuarios = (props) => {
                               title={"Gestão de Usuários - Cadastro"}                                                                   
                               setIsInserting={setIsInserting}
                             />
+                          }
+                          {
+                              changingPassword &&
+                              <FormularioPassword
+                                title={"Gestão de Usuários - Alterando Senha"}                                                                   
+                                setIsInserting={setChangingPassword}
+                                record={selectedRecord}
+                              />
+
                           }
                     </Col>                 
                 </Row>                               

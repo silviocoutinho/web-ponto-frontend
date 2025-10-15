@@ -2,8 +2,10 @@ import { naoExisteValor } from "../../validacaoDados";
 import { checkAllFields } from "./iterateFields";
 import { checkSpecialValues } from './specialValues';
 import { formcheck } from "./formCheck";
+import { lengthPassword, checkPasswords } from "./password";
 
 import { ALERT_DANGER } from "../imports";
+import { set } from "lodash";
 
   const OperationType = {
     NEW: 0,
@@ -84,3 +86,32 @@ export const dadosInvalidosEdicao = (  form, dadosOriginais, setGenericMessage  
   return result;
 
 };
+
+export const dadosInvalidosPassword = (  form, setGenericMessage  ) => {
+
+  let result = false;
+  let message = '';
+  
+  
+  const lenPass = lengthPassword(form.password);
+  if (!naoExisteValor(lenPass) ) {
+    message = message +  lenPass;
+    result = true;
+  }
+
+  const equalPass = checkPasswords(form);
+    if (!naoExisteValor(equalPass) ) {
+    message = message +  equalPass;
+    result = true;
+  }
+
+  setGenericMessage(
+  {active: result, 
+    message: `${message}`, 
+    type: ALERT_DANGER
+  });
+
+  return result;
+
+
+}
