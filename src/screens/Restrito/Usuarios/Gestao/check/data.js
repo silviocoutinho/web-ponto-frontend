@@ -28,6 +28,19 @@ export const dadosInvalidos = (  form, setGenericMessage  ) => {
     result = true;
   }
 
+  const lenPass = lengthPassword(form.password);
+  if (!naoExisteValor(lenPass) ) {
+    message = message +  lenPass;
+    result = true;
+  }
+
+  const equalPass = checkPasswords(form);
+    if (!naoExisteValor(equalPass) ) {
+    message = message +  equalPass;
+    result = true;
+  }
+
+
   (message !== '' ? result = true : result = false)
 
   setGenericMessage(
