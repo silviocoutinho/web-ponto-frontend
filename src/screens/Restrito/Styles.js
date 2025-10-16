@@ -12,6 +12,11 @@ export const IndexStyles = styled.div`
     text-align: center;
   }
 
+  .version-software {   
+      font-weight: 700;
+      font-size: .75rem;     
+  }
+
   .header-title {
     /* unvisited link */
     a {

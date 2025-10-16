@@ -8,6 +8,8 @@ import ActionCreators from '../../../redux/actionCreators';
 import { HeaderStyles } from '../Styles';
 import logo from '../../Resource/images/logo-small6.jpg';
 
+import VersaoSoftware from './Version';
+
 const Header = props => {
   const navAlertIcon = 0;
   return (
@@ -18,6 +20,7 @@ const Header = props => {
             <Link to={'/restrito'} className="header-title">
               <Image src={logo} className="navbar-logo" rounded />
               <span>{props.title}</span>
+              <VersaoSoftware />
             </Link>
           </Navbar.Brand>
           <button
