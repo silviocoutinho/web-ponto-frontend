@@ -63,7 +63,7 @@ const GestaoUsuarios = (props) => {
 
     useEffect(() => {
         filterData(setGenericMessage, setDataDB, 'funcionarios/nome');            
-      }, [isEditing, isInserting, changingPassword]);
+      }, [isEditing, isInserting, changingPassword, isRemoving]);
 
      
       if (!props.auth.isAuth) {

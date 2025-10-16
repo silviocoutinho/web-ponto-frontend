@@ -26,6 +26,7 @@ const removeDataFromAPI = (
   setTypeOfErrorMessage,
   setErrorMessage,
   setDataDB,
+  setIsRemoving
 ) => {
 
   const token = localStorage.getItem('token');  
@@ -61,7 +62,8 @@ const removeDataFromAPI = (
                 setErrorMessage,
                 'success',
                 'Registro Desabilitado corretamente!',
-              );                     
+              );   
+              setIsRemoving(false);                  
             }           
           })
           .catch(err => {        
