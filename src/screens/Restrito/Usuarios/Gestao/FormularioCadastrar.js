@@ -51,8 +51,7 @@ const FormularioCadastrar = ({title, setIsInserting}) => {
         const token = localStorage.getItem('token');      
         const dadosParaEnvio = gerarDadosParaEnvioNovo(form);        
         
-        console.log('Dados para Envio: ', dadosParaEnvio);
-        
+               
         setGenericMessage({active: false, message: '', type: ALERT_DANGER});  
         evt.preventDefault();
         

@@ -2,8 +2,7 @@ import axios from 'axios';
 import { ALERT_DANGER, ALERT_SUCCESS } from './imports'; 
 import {  createdCode, badRequestCode, noContent } from './imports';
 
-export const postDataToAPI = (data, url, token, setGenericMessage, setGenericMethod  )=>{
-  console.log('data ===>', data, 'url ====>', url);
+export const postDataToAPI = (data, url, token, setGenericMessage, setGenericMethod  )=>{  
     axios.post(url, 
         data,
         { 
