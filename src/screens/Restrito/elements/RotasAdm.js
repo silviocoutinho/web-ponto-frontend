@@ -10,6 +10,8 @@ import EnviarHoleriteLicencaPremio from '../Holerite/EnviarHoleriteLicencaPremio
 import GerenciarCertificados from '../Cursos/GerenciamentoDeCertificados';
 import EnviarHoleriteAdiantamento13 from '../Holerite/EnviarHoleriteAdiantamento13';
 
+import GestaoUsuarios from '../Usuarios/Gestao';
+
 const RotasAdm = props => {
   return (
     <>
@@ -38,6 +40,11 @@ const RotasAdm = props => {
           exact
           path={`${props.path}/manager-certificates`}
           component={GerenciarCertificados}
+        />
+        <Route
+          exact
+          path={`${props.path}/manager-users`}
+          component={GestaoUsuarios}
         />
         <Route path="*" exact={true} component={PageNotFound} />
       </Switch>

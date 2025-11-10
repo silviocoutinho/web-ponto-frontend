@@ -12,6 +12,11 @@ export const IndexStyles = styled.div`
     text-align: center;
   }
 
+  .version-software {   
+      font-weight: 700;
+      font-size: .75rem;     
+  }
+
   .header-title {
     /* unvisited link */
     a {
@@ -139,6 +144,13 @@ export const IndexStyles = styled.div`
     width: 7rem;
   }
 
+  .tabela-badge {
+    margin: 0rem;
+    width: 4rem;
+    font-size: 1rem;
+  }
+
+
   .formulario-item {
     margin-top: 1.5rem;
     font-size: 1.25rem;
@@ -152,6 +164,27 @@ export const IndexStyles = styled.div`
 
   .formulario-aviso-erro {
     width: 35rem;
+  }
+
+  .formulario-group-button {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .formulario-group {
+    margin: 0rem!important;
+  }
+
+  .tabela-button {
+    font-size: 1rem;
+    font-weight: 600;
+    width: 15rem; 
+    background: #1079d5 ;
+    margin-left: 1rem;
+  }
+  .tabela-titulo  {
+    font-size: 1.6rem;
+    font-weight: 700;
   }
 `;
 

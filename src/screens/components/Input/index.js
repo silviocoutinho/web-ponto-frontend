@@ -1,28 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { Form } from 'react-bootstrap';
-import { BsFillBellFill as BsFill } from 'react-icons/bs';
+
 
 import { ComponentStyles } from './Styles';
 
-const Input = ({ fieldName, type, label = '', placeholder, validate }) => {
-  const [field, setField] = useState('');
-
-  const onChange = evt => {
-    setField(evt.target.value);
-  };
-
+const Input = ({ fieldName, value = '', label = '', placeholder, size = 'sm', disable=false, onChange }) => { 
   return (
-    <ComponentStyles>
-      <Form.Group controlId="formGridUpdateItem">
-        <Form.Label className="formulario-item">{label}</Form.Label>
-        <Form.Control
-          id={fieldName}
-          size="lg"
-          type={type}
-          value={field}
-          onChange={onChange}
-          placeholder={placeholder}
-        />
+    <ComponentStyles>     
+      <Form.Group>                      
+        <Form.Label className='formulario-item formulario-label'>{label}</Form.Label>
+          <Form.Control 
+            id={fieldName}
+            size={size} 
+            type='text' 
+            value={value} 
+            onChange={onChange} 
+            placeholder={placeholder}
+            disabled={disable ? true : undefined}
+          />                        
       </Form.Group>
     </ComponentStyles>
   );

@@ -8,6 +8,8 @@ import ActionCreators from '../../../redux/actionCreators';
 import { HeaderStyles } from '../Styles';
 import logo from '../../Resource/images/logo-small6.jpg';
 
+import VersaoSoftware from './Version';
+
 const Header = props => {
   const navAlertIcon = 0;
   return (
@@ -18,6 +20,7 @@ const Header = props => {
             <Link to={'/restrito'} className="header-title">
               <Image src={logo} className="navbar-logo" rounded />
               <span>{props.title}</span>
+              <VersaoSoftware />
             </Link>
           </Navbar.Brand>
           <button
@@ -90,6 +93,47 @@ const Header = props => {
                 </NavDropdown.Item>
               </NavDropdown>
             )}
+
+            {props.auth.user.adm && (
+              <NavDropdown
+                title="Gestão de Usuários"
+                id="basic-nav-dropdown"
+                className="menu-usuario"
+              >
+                <NavDropdown.Item
+                  eventKey="1"
+                  as={Link}
+                  to="/restrito/manager-users"
+                >
+                  Todos Usuários
+                </NavDropdown.Item>   
+                <NavDropdown.Item
+                  eventKey="2"
+                  as={Link}
+                  to="/restrito/manager-users"
+                >
+                  Usuários Ativos
+                </NavDropdown.Item>   
+                <NavDropdown.Item
+                  eventKey="1"
+                  as={Link}
+                  to="/restrito/manager-users"
+                >
+                  Usuários Inativos
+                </NavDropdown.Item>  
+                <NavDropdown.Divider />  
+                <NavDropdown.Item
+                  eventKey="1"
+                  as={Link}
+                  to="/restrito/manager-users"
+                >
+                  Adicionar Usuários
+                </NavDropdown.Item>  
+                       
+              </NavDropdown>           
+            )}
+
+
             <NavDropdown
               title={props.auth.user.nome}
               id="basic-nav-dropdown"
